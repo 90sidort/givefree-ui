@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     font-style: normal;
 }
 html {
+    --red: #881512;
     --black: #393939;
     --gray: #3A3A3A;
     --lightGray: #e1e1e1;
@@ -16,6 +17,7 @@ html {
     --maxWidth: 1000px;
     --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
     box-sizing: border-box;
+    font-size: 10px;
 }
 *,*:before, #:after {
     box-sizing: inherit;

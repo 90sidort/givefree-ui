@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const PriceTag = styled.span`
-  background: var(--red);
+const CatTag = styled.span`
+  background: var(--black);
   transform: rotate(3deg);
   color: white;
   font-weight: 600;
@@ -14,4 +14,4 @@ const PriceTag = styled.span`
   right: -3px;
 `;
 
-export default PriceTag;
+export default CatTag;

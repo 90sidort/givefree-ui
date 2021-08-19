@@ -1,7 +1,3 @@
-export default function Index() {
-  return (
-    <div>
-      <p>Hey!</p>
-    </div>
-  );
-}
+import Item from "./item";
+
+export default Item;
