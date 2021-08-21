@@ -34,7 +34,6 @@ export default function CreateItem() {
         e.preventDefault();
         const res = await addItem();
         resetInitial();
-        console.log(res);
         Router.push({
           pathname: `/item/${res.data.addItem.id}`,
         });

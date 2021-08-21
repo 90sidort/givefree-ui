@@ -1,6 +1,6 @@
 import Link from "next/link";
-import CatTag from "./styles/CatTag";
 
+import CatTag from "./styles/CatTag";
 import { ItemStyles } from "./styles/ItemStyles";
 import TitleStyles from "./styles/Title";
 
@@ -23,6 +23,9 @@ export default function ItemCard({ item }) {
       </TitleStyles>
       <CatTag>{category}</CatTag>
       {description && <p>{description}</p>}
+      <div className="buttonList">
+        <Link href={{ pathname: "update", query: { id: id } }}>Edit</Link>
+      </div>
     </ItemStyles>
   );
 }

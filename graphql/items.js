@@ -1,5 +1,20 @@
 import gql from "graphql-tag";
 
+export const ADD_ITEM = gql`
+  mutation ADD_ITEM($item: ItemInput!, $file: FileUpload) {
+    addItem(item: $item, file: $file) {
+      name
+      id
+      description
+      category
+      images {
+        url
+        alt
+      }
+    }
+  }
+`;
+
 export const GET_ITEM = gql`
   query GET_ITEM($id: Int) {
     getItems(id: $id) {
@@ -38,17 +53,11 @@ export const GET_ITEMS = gql`
   }
 `;
 
-export const ADD_ITEM = gql`
-  mutation ADD_ITEM($item: ItemInput!, $file: FileUpload) {
-    addItem(item: $item, file: $file) {
+export const UPDATE_ITEM = gql`
+  mutation UPDATE_ITEM($id: Int!, $item: ItemInputUpdate!) {
+    updateItem(id: $id, item: $item) {
       name
       id
-      description
-      category
-      images {
-        url
-        alt
-      }
     }
   }
 `;
