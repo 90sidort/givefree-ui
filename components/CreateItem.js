@@ -1,23 +1,47 @@
+import { useMutation } from "@apollo/client";
+import Router from "next/router";
+
+import { ADD_ITEM, GET_ITEMS } from "../graphql/items";
 import useForm from "../lib/useForm";
+import DisplayError from "./ErrorMessage";
 import FormStyles from "./styles/Form";
 
 export default function CreateItem() {
   const { inputs, changeHandler, resetInitial } = useForm({
     name: "",
-    image: "",
-    state: "good",
-    category: "other",
+    file: "",
+    state: "GOOD",
+    category: "OTHER",
     giverId: 11122,
     description: "",
   });
+  const [addItem, { loading, error, data }] = useMutation(ADD_ITEM, {
+    variables: {
+      item: {
+        name: inputs.name,
+        state: inputs.state,
+        category: inputs.category,
+        giverId: inputs.giverId,
+        description: inputs.description,
+      },
+      file: inputs.file,
+    },
+    refetchQueries: [{ query: GET_ITEMS }],
+  });
   return (
     <FormStyles
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        console.log(inputs);
+        const res = await addItem();
+        resetInitial();
+        console.log(res);
+        Router.push({
+          pathname: `/item/${res.data.addItem.id}`,
+        });
       }}
     >
-      <fieldset>
+      <DisplayError error={error} />
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="name">
           Name
           <input
@@ -29,9 +53,9 @@ export default function CreateItem() {
             onChange={changeHandler}
           />
         </label>
-        <label htmlFor="image">
+        <label htmlFor="file">
           Image
-          <input type="file" id="image" name="image" onChange={changeHandler} />
+          <input type="file" id="file" name="file" onChange={changeHandler} />
         </label>
         <label htmlFor="state">
           State
@@ -42,10 +66,10 @@ export default function CreateItem() {
             value={inputs.state}
             onChange={changeHandler}
           >
-            <option value="new">New</option>
-            <option value="good">Good</option>
-            <option value="decent">Decent</option>
-            <option value="broken">Broken</option>
+            <option value="NEW">New</option>
+            <option value="GOOD">Good</option>
+            <option value="DECENT">Decent</option>
+            <option value="BROKEN">Broken</option>
           </select>
         </label>
         <label htmlFor="category">
@@ -57,18 +81,18 @@ export default function CreateItem() {
             value={inputs.category}
             onChange={changeHandler}
           >
-            <option value="other">Other</option>
-            <option value="t-shirt">T-shirt</option>
-            <option value="sweatshirt">Sweatshirt</option>
-            <option value="trousers">Trousers</option>
-            <option value="hoodie">Hoodie</option>
-            <option value="dress">Dress</option>
-            <option value="polo">Polo</option>
-            <option value="jacket">Jacket</option>
-            <option value="coat">Coat</option>
-            <option value="jeans">Jeans</option>
-            <option value="socks">Socks</option>
-            <option value="shorts">Shorts</option>
+            <option value="OTHER">Other</option>
+            <option value="TSHIRT">T-shirt</option>
+            <option value="SWEATSHIRT">Sweatshirt</option>
+            <option value="TROUSERS">Trousers</option>
+            <option value="HOODIE">Hoodie</option>
+            <option value="DRESS">Dress</option>
+            <option value="POLO">Polo</option>
+            <option value="JACKET">Jacket</option>
+            <option value="COAT">Coat</option>
+            <option value="JEANS">Jeans</option>
+            <option value="SOCKS">Socks</option>
+            <option value="SHORTS">Shorts</option>
           </select>
         </label>
         <label htmlFor="description">

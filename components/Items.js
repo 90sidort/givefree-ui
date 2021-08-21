@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 
 import { GET_ITEMS } from "../graphql/items";
-import SingleItem from "./SingleItem";
+import ItemCard from "./ItemCard";
 import { ItemsList } from "./styles/Items";
 
 export default function Items() {
@@ -12,7 +12,7 @@ export default function Items() {
     <div>
       <ItemsList>
         {data.getItems.map((item, i) => {
-          return <SingleItem key={i} item={item} />;
+          return <ItemCard key={i} item={item} />;
         })}
       </ItemsList>
     </div>

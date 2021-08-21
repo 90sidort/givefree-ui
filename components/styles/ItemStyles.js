@@ -1,6 +1,20 @@
 import styled from "styled-components";
 
-const ItemStyles = styled.div`
+export const SingleItemStyles = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: var(--maxWidth);
+  justify-content: center;
+  align-items: top;
+  gap: 2rem;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+`;
+
+export const ItemStyles = styled.div`
   background: white;
   border: 1px solid var(--offWhite);
   box-shadow: var(--bs);
@@ -34,5 +48,3 @@ const ItemStyles = styled.div`
     }
   }
 `;
-
-export default ItemStyles;
