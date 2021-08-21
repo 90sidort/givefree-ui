@@ -8,10 +8,16 @@ export default function SingleItem({ item }) {
   const { name, images, id, category, description } = item;
   return (
     <ItemStyles>
-      {images?.length > 0 &&
+      {images?.length > 0 ? (
         images.map((image, i) => {
           return <img key={i} src={image.url} alt={image.alt} />;
-        })}
+        })
+      ) : (
+        <img
+          src={"http://localhost:4000/placeholder.jpg"}
+          alt={"placeholder"}
+        />
+      )}
       <TitleStyles>
         <Link href={`/item/${id}`}>{name}</Link>
       </TitleStyles>
