@@ -16,14 +16,13 @@ export const ADD_ITEM = gql`
 `;
 
 export const GET_ITEM = gql`
-  query GET_ITEM($id: Int) {
-    getItems(id: $id) {
+  query GET_ITEM($id: Int!) {
+    getItem(id: $id) {
       name
       id
       state
       status
       category
-      description
       images {
         url
         alt
@@ -37,17 +36,20 @@ export const GET_ITEM = gql`
 `;
 
 export const GET_ITEMS = gql`
-  query GET_ITEMS {
-    getItems {
+  query GET_ITEMS($skip: Int, $first: Int) {
+    getItems(skip: $skip, first: $first) {
       name
       id
       state
       status
-      description
       category
       images {
         url
         alt
+      }
+      giver {
+        name
+        id
       }
     }
   }

@@ -13,7 +13,6 @@ export default function Pagination({ page }) {
   if (error) return <DisplayError error={error} />;
   const { countItems } = data;
   const pageCount = Math.ceil(countItems / perPage);
-  console.log(page <= 1);
   return (
     <PaginationStyles>
       <Head>

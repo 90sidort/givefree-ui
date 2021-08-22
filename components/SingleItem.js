@@ -12,8 +12,8 @@ export default function SingleItem({ id }) {
     variables: { id: searchId },
   });
   if (data) {
-    const { getItems } = data;
-    item = getItems[0];
+    const { getItem } = data;
+    item = getItem;
   }
   if (loading) return <p>Loading...</p>;
   if (error) <DisplayError error={error} />;

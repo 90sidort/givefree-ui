@@ -7,7 +7,6 @@ export default function Item() {
   const {
     query: { page },
   } = useRouter();
-  console.log(page);
   const currentPage = page ? parseInt(page) : 1;
   return (
     <div>
