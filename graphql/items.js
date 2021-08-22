@@ -61,3 +61,11 @@ export const UPDATE_ITEM = gql`
     }
   }
 `;
+
+export const DELETE_ITEM = gql`
+  mutation DELETE_ITEM($id: Int!) {
+    deleteItem(id: $id) {
+      id
+    }
+  }
+`;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DeleteItem from "./DeleteItem";
 
 import CatTag from "./styles/CatTag";
 import { ItemStyles } from "./styles/ItemStyles";
@@ -25,6 +26,7 @@ export default function ItemCard({ item }) {
       {description && <p>{description}</p>}
       <div className="buttonList">
         <Link href={{ pathname: "update", query: { id: id } }}>Edit</Link>
+        <DeleteItem id={id}>Delete</DeleteItem>
       </div>
     </ItemStyles>
   );
