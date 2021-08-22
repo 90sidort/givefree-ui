@@ -69,3 +69,9 @@ export const DELETE_ITEM = gql`
     }
   }
 `;
+
+export const COUNT_ITEMS = gql`
+  query COUNT_ITEMS {
+    countItems
+  }
+`;
