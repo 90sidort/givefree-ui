@@ -1,9 +1,13 @@
+import { useState } from "react";
 import SigninComponent from "../components/Signin";
+import Signup from "../components/Signup";
 
 export default function Signin() {
+  const [showForm, setShowForm] = useState("signin");
   return (
     <div>
-      <SigninComponent />
+      {showForm === "signin" && <SigninComponent changeForm={setShowForm} />}
+      {showForm === "signup" && <Signup changeForm={setShowForm} />}
     </div>
   );
 }

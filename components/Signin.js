@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/client";
+import Router from "next/router";
+
 import { ME, SIGN_IN } from "../graphql/user";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 import FormStyles from "./styles/Form";
 
-export default function SigninComponent({ query }) {
+export default function SigninComponent({ query, changeForm }) {
   const { inputs, resetInitial, changeHandler } = useForm({
     username: "",
     password: "",
@@ -19,7 +21,12 @@ export default function SigninComponent({ query }) {
       const {
         data: { signinUser },
       } = await signin();
-      if (signinUser) resetInitial();
+      if (signinUser) {
+        resetInitial();
+        Router.push({
+          pathname: `/`,
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -50,6 +57,9 @@ export default function SigninComponent({ query }) {
         Reset
       </button>
       <button type="submit">Sign in!</button>
+      <p onClick={() => changeForm("signup")}>
+        Do not have an account? Click here!
+      </p>
     </FormStyles>
   );
 }
