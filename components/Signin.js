@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { SIGN_IN } from "../graphql/user";
+import { ME, SIGN_IN } from "../graphql/user";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 import FormStyles from "./styles/Form";
@@ -11,6 +11,7 @@ export default function SigninComponent({ query }) {
   });
   const [signin, { data, loading, error }] = useMutation(SIGN_IN, {
     variables: { ...inputs },
+    refetchQueries: [{ query: ME }],
   });
   async function handleSubmit(e) {
     e.preventDefault();

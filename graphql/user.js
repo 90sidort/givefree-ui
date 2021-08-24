@@ -5,3 +5,18 @@ export const SIGN_IN = gql`
     signinUser(password: $password, username: $username)
   }
 `;
+
+export const ME = gql`
+  query ME {
+    me {
+      username
+      id
+    }
+  }
+`;
+
+export const SIGN_OUT = gql`
+  mutation SIGN_OUT {
+    signout
+  }
+`;
