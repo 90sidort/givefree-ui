@@ -21,6 +21,28 @@ export const SIGN_OUT = gql`
   }
 `;
 
+export const RESET_REQUEST = gql`
+  mutation RESET_REQUEST($email: String!) {
+    requestReset(email: $email)
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation RESET_PASSWORD(
+    $email: String!
+    $token: String!
+    $password: String!
+    $retype: String!
+  ) {
+    resetPassword(
+      email: $email
+      token: $token
+      password: $password
+      retype: $retype
+    )
+  }
+`;
+
 export const SIGN_UP = gql`
   mutation SIGN_UP(
     $username: String!
