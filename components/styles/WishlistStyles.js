@@ -1,6 +1,20 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const CartStyles = styled.div`
+export const WishlistItemStyles = styled.li`
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--black);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  img {
+    margin-right: 1rem;
+  }
+  h3,
+  p {
+    margin: 0;
+  }
+`;
+
+export const WishlistStyles = styled.div`
   padding: 20px;
   position: relative;
   background: white;
@@ -43,5 +57,3 @@ const CartStyles = styled.div`
     overflow: scroll;
   }
 `;
-
-export default CartStyles;
