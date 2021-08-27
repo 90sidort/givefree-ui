@@ -1,5 +1,17 @@
 import styled from "styled-components";
 
+export const WishlistCountStyles = styled.div`
+  background: var(--red);
+  color: white;
+  border-radius: 50%;
+  padding: 0.5rem;
+  line-height: 2rem;
+  min-width: 3rem;
+  margin-left: 1rem;
+  font-feature-settings: "t-num";
+  font-variant-numeric: "tabular-nums";
+`;
+
 export const WishlistItemStyles = styled.li`
   padding: 1rem 0;
   border-bottom: 1px solid var(--black);

@@ -5,6 +5,8 @@ import { WishlistItemStyles, WishlistStyles } from "./styles/WishlistStyles";
 import { useUser } from "./User";
 import DisplayError from "./ErrorMessage";
 import Supreme from "./styles/Supreme";
+import { useWishlist } from "../lib/WishlistState";
+import CloseButtonStyles from "./styles/CloseButtonStyles";
 
 function WishlistItem({ item, i }) {
   return (
@@ -31,20 +33,26 @@ function WishlistItem({ item, i }) {
 
 export default function Wishlist() {
   const me = useUser();
+  const { wishlistOpen, closeWishlist, setWishlistCount } = useWishlist();
   const { data, loading, error } = useQuery(GET_WISHLIST, {
     variables: { userId: 11122 },
   });
   if (!me || !data) return null;
+  if (data?.getWishlist?.length > 0)
+    setWishlistCount(data?.getWishlist?.length);
   return (
-    <WishlistStyles open>
+    <WishlistStyles open={wishlistOpen}>
       <DisplayError error={error} />
       {loading && <p>Loading...</p>}
       <header>
-        <Supreme>{me.me.username}'s wishlist</Supreme>
+        <Supreme>{me?.me?.username}'s wishlist</Supreme>
+        <CloseButtonStyles onClick={closeWishlist}>&times;</CloseButtonStyles>
       </header>
       <ul>
         {data.getWishlist.length > 0 ? (
-          data.getWishlist.map((wish, i) => <WishlistItem item={wish} i={i} />)
+          data.getWishlist.map((wish, i) => (
+            <WishlistItem item={wish} i={i} key={i} />
+          ))
         ) : (
           <p>Your wishlist is empty!</p>
         )}

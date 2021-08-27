@@ -14,3 +14,9 @@ export const GET_WISHLIST = gql`
     }
   }
 `;
+
+export const ADD_ITEM_TO_WISHLIST = gql`
+  mutation ADD_ITEM_TO_WISHLIST($itemId: Int!) {
+    addToWishlist(itemId: $itemId)
+  }
+`;
