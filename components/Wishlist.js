@@ -7,6 +7,7 @@ import DisplayError from "./ErrorMessage";
 import Supreme from "./styles/Supreme";
 import { useWishlist } from "../lib/WishlistState";
 import CloseButtonStyles from "./styles/CloseButtonStyles";
+import RemoveFromWishlist from "./RemoveFromWishlist";
 
 function WishlistItem({ item, i }) {
   return (
@@ -27,6 +28,7 @@ function WishlistItem({ item, i }) {
         <p>{item.category}</p>
         <p>{item.state}</p>
       </div>
+      <RemoveFromWishlist itemId={item.id} />
     </WishlistItemStyles>
   );
 }

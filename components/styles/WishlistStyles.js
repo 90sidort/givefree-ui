@@ -12,6 +12,16 @@ export const WishlistCountStyles = styled.div`
   font-variant-numeric: "tabular-nums";
 `;
 
+export const WishlistButtonStyles = styled.button`
+  font-size: 3rem;
+  background: none;
+  border: 0;
+  &:hover {
+    color: var(--red);
+    cursor: pointer;
+  }
+`;
+
 export const WishlistItemStyles = styled.li`
   padding: 1rem 0;
   border-bottom: 1px solid var(--black);

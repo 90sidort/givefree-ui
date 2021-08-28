@@ -20,3 +20,9 @@ export const ADD_ITEM_TO_WISHLIST = gql`
     addToWishlist(itemId: $itemId)
   }
 `;
+
+export const REMOVE_FROM_WISHLIST = gql`
+  mutation REMOVE_FROM_WISHLIST($itemId: Int!) {
+    removeFromWishlist(itemId: $itemId)
+  }
+`;
