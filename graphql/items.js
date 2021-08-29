@@ -35,14 +35,38 @@ export const GET_ITEM = gql`
   }
 `;
 
+export const GET_ITEMS_SEARCH = gql`
+  query GET_ITEMS($name: String, $description: String) {
+    items: getItems(name: $name, description: $description) {
+      name
+      id
+      images {
+        url
+        alt
+      }
+    }
+  }
+`;
+
 export const GET_ITEMS = gql`
-  query GET_ITEMS($skip: Int, $first: Int) {
-    getItems(skip: $skip, first: $first) {
+  query GET_ITEMS(
+    $skip: Int
+    $first: Int
+    $name: String
+    $description: String
+  ) {
+    getItems(
+      skip: $skip
+      first: $first
+      name: $name
+      description: $description
+    ) {
       name
       id
       state
       status
       category
+      description
       images {
         url
         alt

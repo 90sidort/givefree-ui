@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Navigation from "./Navigation";
+import Search from "./Search";
 import HeaderStyles from "./styles/HeaderStyles";
 import LogoStyles from "./styles/LogoStyles";
 import Wishlist from "./Wishlist";
@@ -15,7 +16,7 @@ export default function Header() {
         <Navigation />
       </div>
       <div className="sub-bar">
-        <p>Search</p>
+        <Search />
       </div>
       <Wishlist />
     </HeaderStyles>
