@@ -11,6 +11,7 @@ export default function CreateItem() {
     name: "",
     file: "",
     state: "GOOD",
+    status: "ONGOING",
     category: "OTHER",
     giverId: 11122,
     description: "",
@@ -72,7 +73,7 @@ export default function CreateItem() {
           </select>
         </label>
         <label htmlFor="category">
-          State
+          Category
           <select
             type="select"
             id="category"
@@ -92,6 +93,19 @@ export default function CreateItem() {
             <option value="JEANS">Jeans</option>
             <option value="SOCKS">Socks</option>
             <option value="SHORTS">Shorts</option>
+          </select>
+        </label>
+        <label htmlFor="state">
+          Status
+          <select
+            type="select"
+            id="status"
+            name="status"
+            value={inputs.status}
+            onChange={changeHandler}
+          >
+            <option value="ONGOING">Ongoing</option>
+            <option value="DRAFT">Draft</option>
           </select>
         </label>
         <label htmlFor="description">

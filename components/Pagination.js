@@ -8,7 +8,9 @@ import DisplayError from "./ErrorMessage";
 import PaginationStyles from "./styles/PaginationStyles";
 
 export default function Pagination({ page }) {
-  const { error, loading, data } = useQuery(COUNT_ITEMS);
+  const { error, loading, data } = useQuery(COUNT_ITEMS, {
+    variables: { status: "ONGOING" },
+  });
   if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { countItems } = data;

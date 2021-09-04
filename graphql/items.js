@@ -36,8 +36,8 @@ export const GET_ITEM = gql`
 `;
 
 export const GET_ITEMS_SEARCH = gql`
-  query GET_ITEMS($name: String, $description: String) {
-    items: getItems(name: $name, description: $description) {
+  query GET_ITEMS($name: String, $status: StatusEnum) {
+    items: getItems(name: $name, status: $status) {
       name
       id
       images {
@@ -49,18 +49,8 @@ export const GET_ITEMS_SEARCH = gql`
 `;
 
 export const GET_ITEMS = gql`
-  query GET_ITEMS(
-    $skip: Int
-    $first: Int
-    $name: String
-    $description: String
-  ) {
-    getItems(
-      skip: $skip
-      first: $first
-      name: $name
-      description: $description
-    ) {
+  query GET_ITEMS($skip: Int, $first: Int, $name: String, $status: StatusEnum) {
+    getItems(skip: $skip, first: $first, name: $name, status: $status) {
       name
       id
       state
@@ -97,7 +87,7 @@ export const DELETE_ITEM = gql`
 `;
 
 export const COUNT_ITEMS = gql`
-  query COUNT_ITEMS {
-    countItems
+  query COUNT_ITEMS($status: StatusEnum) {
+    countItems(status: $status)
   }
 `;

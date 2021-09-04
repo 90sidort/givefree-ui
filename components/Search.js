@@ -32,7 +32,7 @@ export default function Search() {
       searchChill({
         variables: {
           name: inputValue,
-          description: inputValue,
+          status: "ONGOING",
         },
       });
     },

@@ -11,11 +11,12 @@ export default function Navigation() {
   const { openWishlist, wishlistCount } = useWishlist();
   return (
     <NavStyles>
-      <Link href="/items">Items</Link>
+      <Link href="/items">Take</Link>
       {data?.me && (
         <>
           <Link href="/give">Give</Link>
-          <Link href="/take">Take</Link>
+          <Link href="/taken">Taken</Link>
+          <Link href="/given">Given</Link>
           <button type="button" onClick={openWishlist}>
             Wishlist
             <WishlistCount count={wishlistCount} />
