@@ -1,16 +1,19 @@
 import { useQuery } from "@apollo/client";
 import { perPage } from "../config";
 
-import { GET_ITEMS } from "../graphql/items";
+import { GET_ITEMS, GET_TAKEN } from "../graphql/items";
 import ItemCard from "./ItemCard";
 import { ItemsList } from "./styles/Items";
 
-export default function Items({ page }) {
-  const { data, error, loading } = useQuery(GET_ITEMS, {
+export default function Items({ page, status }) {
+  const executeQuery = status === "ONGOING" ? GET_ITEMS : GET_TAKEN;
+  const dataName = status === "ONGOING" ? "getItems" : "getTaken";
+  const { data, error, loading } = useQuery(executeQuery, {
     variables: {
       skip: page * perPage - perPage,
       first: perPage,
-      status: "ONGOING",
+      userId: 11122,
+      status,
     },
   });
   if (loading) return <p>Loading...</p>;
@@ -18,7 +21,7 @@ export default function Items({ page }) {
   return (
     <div>
       <ItemsList>
-        {data?.getItems.map((item, i) => {
+        {data[`${dataName}`].map((item, i) => {
           return <ItemCard key={i} item={item} />;
         })}
       </ItemsList>

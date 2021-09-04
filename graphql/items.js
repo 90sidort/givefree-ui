@@ -48,6 +48,27 @@ export const GET_ITEMS_SEARCH = gql`
   }
 `;
 
+export const GET_TAKEN = gql`
+  query GET_TAKEN($userId: Int!) {
+    getTaken(userId: $userId) {
+      name
+      id
+      state
+      status
+      category
+      description
+      images {
+        url
+        alt
+      }
+      giver {
+        name
+        id
+      }
+    }
+  }
+`;
+
 export const GET_ITEMS = gql`
   query GET_ITEMS($skip: Int, $first: Int, $name: String, $status: StatusEnum) {
     getItems(skip: $skip, first: $first, name: $name, status: $status) {
@@ -87,7 +108,7 @@ export const DELETE_ITEM = gql`
 `;
 
 export const COUNT_ITEMS = gql`
-  query COUNT_ITEMS($status: StatusEnum) {
-    countItems(status: $status)
+  query COUNT_ITEMS($status: StatusEnum, $takerId: Int) {
+    countItems(status: $status, takerId: $takerId)
   }
 `;
