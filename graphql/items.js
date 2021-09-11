@@ -37,7 +37,7 @@ export const GET_ITEM = gql`
 
 export const GET_ITEMS_SEARCH = gql`
   query GET_ITEMS($input: ItemSearchInput!) {
-    getItems(input: $input) {
+    items: getItems(input: $input) {
       name
       id
       state
@@ -129,7 +129,7 @@ export const DELETE_ITEM = gql`
 `;
 
 export const COUNT_ITEMS = gql`
-  query COUNT_ITEMS($status: StatusEnum, $takerId: Int) {
-    countItems(status: $status, takerId: $takerId)
+  query COUNT_ITEMS($input: ItemCountInput!) {
+    countItems(input: $input)
   }
 `;

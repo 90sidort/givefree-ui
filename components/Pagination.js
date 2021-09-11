@@ -8,9 +8,9 @@ import { findLink } from "../lib/findLink";
 import DisplayError from "./ErrorMessage";
 import PaginationStyles from "./styles/PaginationStyles";
 
-export default function Pagination({ page, status, takerId }) {
+export default function Pagination({ page, status, takerId, taken }) {
   const { error, loading, data } = useQuery(COUNT_ITEMS, {
-    variables: { status, takerId },
+    variables: { input: { status, takerId, taken } },
   });
   const links = findLink(page, status);
   if (loading) return <p>Loading...</p>;
