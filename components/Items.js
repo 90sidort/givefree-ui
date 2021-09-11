@@ -25,7 +25,7 @@ export default function Items({ page, status, taken }) {
       input: {
         skip: page * perPage - perPage,
         first: perPage,
-        userId: 11122,
+        userId: taken !== undefined ? 11122 : undefined,
         taken,
         status,
       },
