@@ -36,21 +36,8 @@ export const GET_ITEM = gql`
 `;
 
 export const GET_ITEMS_SEARCH = gql`
-  query GET_ITEMS($name: String, $status: StatusEnum) {
-    items: getItems(name: $name, status: $status) {
-      name
-      id
-      images {
-        url
-        alt
-      }
-    }
-  }
-`;
-
-export const GET_TAKEN = gql`
-  query GET_TAKEN($userId: Int!) {
-    getTaken(userId: $userId) {
+  query GET_ITEMS($input: ItemSearchInput!) {
+    getItems(input: $input) {
       name
       id
       state
@@ -69,9 +56,43 @@ export const GET_TAKEN = gql`
   }
 `;
 
+export const GET_TAKEN = gql`
+  query GET_TAKEN($input: ItemSearchInput!) {
+    getTaken(input: $input) {
+      name
+      id
+      state
+      status
+      category
+      description
+      images {
+        url
+        alt
+      }
+    }
+  }
+`;
+
+export const GET_GIVEN = gql`
+  query GET_GIVEN($input: ItemSearchInput!) {
+    getGiven(input: $input) {
+      name
+      id
+      state
+      status
+      category
+      description
+      images {
+        url
+        alt
+      }
+    }
+  }
+`;
+
 export const GET_ITEMS = gql`
-  query GET_ITEMS($skip: Int, $first: Int, $name: String, $status: StatusEnum) {
-    getItems(skip: $skip, first: $first, name: $name, status: $status) {
+  query GET_ITEMS($input: ItemSearchInput!) {
+    getItems(input: $input) {
       name
       id
       state

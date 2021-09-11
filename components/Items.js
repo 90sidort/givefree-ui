@@ -10,21 +10,27 @@ export default function Items({ page, status }) {
   const dataName = status === "ONGOING" ? "getItems" : "getTaken";
   const { data, error, loading } = useQuery(executeQuery, {
     variables: {
-      skip: page * perPage - perPage,
-      first: perPage,
-      userId: 11122,
-      status,
+      input: {
+        skip: page * perPage - perPage,
+        first: perPage,
+        userId: 11122,
+        taken: status === "ONGOING" ? undefined : true,
+        status,
+      },
     },
   });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error {`${error.message}`}</p>;
+  console.log({ data, error, loading });
   return (
     <div>
-      <ItemsList>
-        {data[`${dataName}`].map((item, i) => {
-          return <ItemCard key={i} item={item} />;
-        })}
-      </ItemsList>
+      {data && (
+        <ItemsList>
+          {data[`${dataName}`].map((item, i) => {
+            return <ItemCard key={i} item={item} />;
+          })}
+        </ItemsList>
+      )}
+      {loading && <p>Loading...</p>}
+      {error && <p>Error {`${error.message}`}</p>}
     </div>
   );
 }

@@ -31,8 +31,10 @@ export default function Search() {
     onInputValueChange() {
       searchChill({
         variables: {
-          name: inputValue,
-          status: "ONGOING",
+          input: {
+            name: inputValue,
+            status: "ONGOING",
+          },
         },
       });
     },
