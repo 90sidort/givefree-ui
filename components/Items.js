@@ -42,7 +42,7 @@ export default function Items({ page, view }) {
         (data[`${dataName}`].length > 0 ? (
           <ItemsList>
             {data[`${dataName}`].map((item, i) => {
-              return <ItemCard key={i} item={item} userid={userData.me.id} />;
+              return <ItemCard key={i} item={item} userid={userData?.me?.id} />;
             })}
           </ItemsList>
         ) : (

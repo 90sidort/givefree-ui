@@ -5,6 +5,7 @@ import Search from "./Search";
 import HeaderStyles from "./styles/HeaderStyles";
 import LogoStyles from "./styles/LogoStyles";
 import Wishlist from "./Wishlist";
+import Wisherlist from "./Wisherlist";
 
 export default function Header() {
   return (
@@ -19,6 +20,7 @@ export default function Header() {
         <Search />
       </div>
       <Wishlist />
+      <Wisherlist />
     </HeaderStyles>
   );
 }

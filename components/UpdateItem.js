@@ -19,7 +19,7 @@ export default function UpdateItem({ id }) {
       variables: { id: searchId },
     }
   );
-  const { inputs, changeHandler } = useForm(getData?.getItems[0]);
+  const { inputs, changeHandler } = useForm(getData?.getItem);
   const [
     updateItem,
     { data: updateData, loading: updateLoading, error: updateError },

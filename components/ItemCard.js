@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useWishlist } from "../lib/WishlistState";
 
 import AddToWishlist from "./AddToWishlist";
 import DeleteItem from "./DeleteItem";
@@ -16,6 +17,7 @@ export default function ItemCard({ item, userid }) {
     status,
     giver: { id: giverId },
   } = item;
+  const { openWisherlist, wishlistCount } = useWishlist();
   return (
     <ItemStyles>
       {images?.length > 0 ? (
@@ -39,6 +41,11 @@ export default function ItemCard({ item, userid }) {
             <Link href={{ pathname: "update", query: { id: id } }}>Edit</Link>
           )}
           {giverId !== userid && <AddToWishlist id={id} />}
+          {giverId === userid && status === "ONGOING" && (
+            <button type="button" onClick={() => openWisherlist(id)} id={id}>
+              Give
+            </button>
+          )}
           {giverId === userid && <DeleteItem id={id}>Delete</DeleteItem>}
         </div>
       )}
