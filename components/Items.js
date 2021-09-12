@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { perPage } from "../config";
 
-import { GET_GIVEN, GET_ITEMS, GET_TAKEN } from "../graphql/items";
+import { GET_GIVEN, GET_GIVING, GET_ITEMS, GET_TAKEN } from "../graphql/items";
 import ItemCard from "./ItemCard";
 import { ItemsList } from "./styles/Items";
 import { useUser } from "./User";
@@ -23,8 +23,8 @@ export default function Items({ page, view }) {
     dataName = "getGiven";
   }
   if (view === "giving") {
-    executeQuery = GET_GIVEN;
-    dataName = "getGiven";
+    executeQuery = GET_GIVING;
+    dataName = "getGiving";
   }
   const { data, error, loading } = useQuery(executeQuery, {
     variables: {

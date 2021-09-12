@@ -1,20 +1,22 @@
 import { useQuery } from "@apollo/client";
 
-import { GET_WISHERS } from "../graphql/user";
+import { GET_WISHERS } from "../graphql/wishlist";
 import { WishlistItemStyles, WishlistStyles } from "./styles/WishlistStyles";
 import { useUser } from "./User";
 import DisplayError from "./ErrorMessage";
 import Supreme from "./styles/Supreme";
 import CloseButtonStyles from "./styles/CloseButtonStyles";
 import { useWishlist } from "../lib/WishlistState";
+import AcceptWisher from "./AcceptWisher";
 
-function WisherItem({ wisher, i }) {
+function WisherItem({ wisher, itemId, i }) {
+  console.log();
   return (
     <WishlistItemStyles key={i}>
       <div>
         <h3>{wisher.username}</h3>
       </div>
-      {/* <RemoveFromWishlist itemId={item.id} /> */}
+      <AcceptWisher wisherId={wisher.id} itemId={itemId} />
     </WishlistItemStyles>
   );
 }
@@ -37,16 +39,16 @@ export default function Wisherlist() {
       <DisplayError error={error} />
       {loading && <p>Loading...</p>}
       <header>
-        {/* <Supreme>{me?.me?.username}'s wishlist</Supreme> */}
+        <Supreme>Possible takers</Supreme>
         <CloseButtonStyles onClick={closeWisherlist}>&times;</CloseButtonStyles>
       </header>
       <ul>
         {data.getWishers.length > 0 ? (
           data.getWishers.map((wisher, i) => (
-            <WisherItem wisher={wisher} i={i} key={i} />
+            <WisherItem wisher={wisher} i={i} key={i} itemId={currentItem} />
           ))
         ) : (
-          <p>Your wishlist is empty!</p>
+          <p>No possible takers!</p>
         )}
       </ul>
     </WishlistStyles>

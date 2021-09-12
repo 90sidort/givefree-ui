@@ -33,7 +33,6 @@ export default function Search() {
         variables: {
           input: {
             name: inputValue,
-            status: "ONGOING",
           },
         },
       });

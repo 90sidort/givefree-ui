@@ -15,15 +15,6 @@ export const ME = gql`
   }
 `;
 
-export const GET_WISHERS = gql`
-  query GET_WISHERS($itemId: Int) {
-    getWishers(itemId: $itemId) {
-      id
-      username
-    }
-  }
-`;
-
 export const SIGN_OUT = gql`
   mutation SIGN_OUT {
     signout

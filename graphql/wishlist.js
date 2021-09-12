@@ -21,8 +21,23 @@ export const ADD_ITEM_TO_WISHLIST = gql`
   }
 `;
 
+export const GIVE_ITEM = gql`
+  mutation GIVE_ITEM($userId: Int!, $itemId: Int!) {
+    giveItem(userId: $userId, itemId: $itemId)
+  }
+`;
+
 export const REMOVE_FROM_WISHLIST = gql`
   mutation REMOVE_FROM_WISHLIST($itemId: Int!) {
     removeFromWishlist(itemId: $itemId)
+  }
+`;
+
+export const GET_WISHERS = gql`
+  query GET_WISHERS($itemId: Int) {
+    getWishers(itemId: $itemId) {
+      id
+      username
+    }
   }
 `;
