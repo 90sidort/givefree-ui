@@ -27,7 +27,7 @@ export default function CreateItem() {
       },
       file: inputs.file,
     },
-    refetchQueries: [{ query: GET_ITEMS }],
+    refetchQueries: [{ query: GET_ITEMS, variables: { input: {} } }],
   });
   return (
     <FormStyles

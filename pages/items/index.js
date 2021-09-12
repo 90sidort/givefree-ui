@@ -8,13 +8,12 @@ export default function Item() {
     query: { page },
   } = useRouter();
   const currentPage = page ? parseInt(page) : 1;
-  const status = "ONGOING";
-  const taken = undefined;
+  const view = "items";
   return (
     <div>
-      <Pagination page={currentPage} status={status} taken={taken} />
-      <Items page={currentPage} status={status} taken={taken} />
-      <Pagination page={currentPage} status={status} taken={taken} />
+      <Pagination page={currentPage} view={view} />
+      <Items page={currentPage} view={view} />
+      <Pagination page={currentPage} view={view} />
     </div>
   );
 }

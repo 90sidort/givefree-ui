@@ -15,12 +15,13 @@ export default function Navigation() {
       {data?.me && (
         <>
           <Link href="/give">Give</Link>
-          <Link href="/taken">Taken</Link>
-          <Link href="/given">Given</Link>
           <button type="button" onClick={openWishlist}>
-            Wishlist
+            Taking
             <WishlistCount count={wishlistCount} />
           </button>
+          <Link href="/giving">Giving</Link>
+          <Link href="/taken">Taken</Link>
+          <Link href="/given">Given</Link>
           <Link href="/account">Account</Link>
           <Signout />
         </>

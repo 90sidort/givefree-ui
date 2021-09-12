@@ -69,6 +69,10 @@ export const GET_TAKEN = gql`
         url
         alt
       }
+      giver {
+        name
+        id
+      }
     }
   }
 `;
@@ -85,6 +89,31 @@ export const GET_GIVEN = gql`
       images {
         url
         alt
+      }
+      giver {
+        name
+        id
+      }
+    }
+  }
+`;
+
+export const GET_GIVING = gql`
+  query GET_GIVING($input: ItemSearchInput!) {
+    getGiving(input: $input) {
+      name
+      id
+      state
+      status
+      category
+      description
+      images {
+        url
+        alt
+      }
+      giver {
+        name
+        id
       }
     }
   }
