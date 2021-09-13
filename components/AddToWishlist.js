@@ -1,12 +1,16 @@
 import { useMutation } from "@apollo/client";
 import { ADD_ITEM_TO_WISHLIST, GET_WISHLIST } from "../graphql/wishlist";
+import { useUser } from "./User";
 
 export default function AddToWishlist({ id }) {
+  const userData = useUser();
   const [addToWishlist, { data, error, loading }] = useMutation(
     ADD_ITEM_TO_WISHLIST,
     {
       variables: { itemId: id },
-      refetchQueries: [{ query: GET_WISHLIST, variables: { userId: 11122 } }],
+      refetchQueries: [
+        { query: GET_WISHLIST, variables: { userId: userData?.me?.id } },
+      ],
     }
   );
   return (

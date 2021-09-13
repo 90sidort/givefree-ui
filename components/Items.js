@@ -31,7 +31,7 @@ export default function Items({ page, view }) {
       input: {
         skip: page * perPage - perPage,
         first: perPage,
-        userId: 11122,
+        userId: userData?.me?.id,
         view,
       },
     },

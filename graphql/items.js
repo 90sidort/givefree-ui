@@ -23,6 +23,7 @@ export const GET_ITEM = gql`
       state
       status
       category
+      description
       images {
         url
         alt

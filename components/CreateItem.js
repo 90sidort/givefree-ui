@@ -5,15 +5,17 @@ import { ADD_ITEM, GET_ITEMS } from "../graphql/items";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 import FormStyles from "./styles/Form";
+import { useUser } from "./User";
 
 export default function CreateItem() {
+  const userData = useUser();
   const { inputs, changeHandler, resetInitial } = useForm({
     name: "",
     file: "",
     state: "GOOD",
     status: "ONGOING",
     category: "OTHER",
-    giverId: 11122,
+    giverId: userData?.me?.id,
     description: "",
   });
   const [addItem, { loading, error, data }] = useMutation(ADD_ITEM, {

@@ -37,7 +37,7 @@ export default function Wishlist() {
   const me = useUser();
   const { wishlistOpen, closeWishlist, setWishlistCount } = useWishlist();
   const { data, loading, error } = useQuery(GET_WISHLIST, {
-    variables: { userId: 11122 },
+    variables: { userId: me?.me?.id },
   });
   if (!me || !data) return null;
   if (data?.getWishlist?.length > 0)

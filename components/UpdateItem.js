@@ -34,6 +34,7 @@ export default function UpdateItem({ id }) {
         description: inputs.description,
       },
     },
+    refetchQueries: [{ query: GET_ITEM, variables: { id: searchId } }],
   });
   if (getLoading) return <p>Loading...</p>;
   return (

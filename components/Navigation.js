@@ -1,8 +1,8 @@
 import Link from "next/link";
+
 import { useWishlist } from "../lib/WishlistState";
 import Signout from "./Signout";
 import NavStyles from "./styles/NavStyles";
-
 import { useUser } from "./User";
 import WishlistCount from "./WishlistCount";
 
