@@ -11,7 +11,6 @@ export default function AcceptWisher({ wisherId, itemId }) {
       { query: GET_GIVING, variables: { input: { view: "giving" } } },
     ],
   });
-  console.log(itemId);
   return (
     <WishlistButtonStyles
       type="button"

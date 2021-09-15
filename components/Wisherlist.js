@@ -10,7 +10,6 @@ import { useWishlist } from "../lib/WishlistState";
 import AcceptWisher from "./AcceptWisher";
 
 function WisherItem({ wisher, itemId, i }) {
-  console.log();
   return (
     <WishlistItemStyles key={i}>
       <div>

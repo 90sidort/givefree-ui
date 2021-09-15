@@ -38,6 +38,7 @@ export default function Wishlist() {
   const { wishlistOpen, closeWishlist, setWishlistCount } = useWishlist();
   const { data, loading, error } = useQuery(GET_WISHLIST, {
     variables: { userId: me?.me?.id },
+    skip: me?.me?.id === undefined,
   });
   if (!me || !data) return null;
   if (data?.getWishlist?.length > 0)
