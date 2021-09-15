@@ -6,6 +6,33 @@ export const SIGN_IN = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation UPDATE_USER(
+    $id: Int!
+    $name: String
+    $surname: String
+    $active: Boolean
+    $email: String
+    $about: String
+  ) {
+    updateUser(
+      id: $id
+      name: $name
+      surname: $surname
+      active: $active
+      email: $email
+      about: $about
+    ) {
+      id
+      name
+      surname
+      active
+      email
+      about
+    }
+  }
+`;
+
 export const ME = gql`
   query ME {
     me {
@@ -15,6 +42,7 @@ export const ME = gql`
       surname
       email
       about
+      active
     }
   }
 `;
