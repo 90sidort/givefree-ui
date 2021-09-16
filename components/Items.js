@@ -1,12 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { perPage } from "../config";
+import { useState } from "react";
 
+import { perPage } from "../config";
 import { GET_GIVEN, GET_GIVING, GET_ITEMS, GET_TAKEN } from "../graphql/items";
 import ItemCard from "./ItemCard";
+import Modal from "./Modal";
 import { ItemsList } from "./styles/Items";
 import { useUser } from "./User";
 
 export default function Items({ page, view }) {
+  const [showModal, setShowModal] = useState(true);
   const userData = useUser();
   let executeQuery;
   let dataName;
@@ -49,7 +52,15 @@ export default function Items({ page, view }) {
           <p>No items!</p>
         ))}
       {loading && <p>Loading...</p>}
-      {error && <p>Error {`${error.message}`}</p>}
+      {error && (
+        <Modal
+          show={showModal}
+          title="Error!"
+          onClose={() => setShowModal(false)}
+        >
+          {`${error.message}`}
+        </Modal>
+      )}
     </div>
   );
 }

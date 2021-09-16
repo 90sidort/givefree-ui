@@ -39,6 +39,10 @@ function Modal({ show, onClose, children, title, onConfirm, confirm }) {
             {confirm}
           </a>
         )}
+        {` `}
+        <a href="#" onClick={handleCloseClick}>
+          Close
+        </a>
       </StyledModal>
     </StyledModalOverlay>
   ) : null;

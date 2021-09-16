@@ -15,6 +15,7 @@ export default function SigninComponent({ query, changeForm }) {
     variables: { ...inputs },
     refetchQueries: [{ query: ME }],
   });
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
