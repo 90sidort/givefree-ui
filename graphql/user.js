@@ -12,7 +12,7 @@ export const UPDATE_USER = gql`
     $name: String
     $surname: String
     $active: Boolean
-    $email: String
+    $newEmail: String
     $about: String
   ) {
     updateUser(
@@ -20,7 +20,7 @@ export const UPDATE_USER = gql`
       name: $name
       surname: $surname
       active: $active
-      email: $email
+      newEmail: $newEmail
       about: $about
     ) {
       id

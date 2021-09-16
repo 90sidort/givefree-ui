@@ -6,7 +6,7 @@ import DisplayError from "./ErrorMessage";
 import FormStyles from "./styles/Form";
 import { UPDATE_USER, ME } from "../graphql/user";
 
-export default function UpdateUser({ data }) {
+export default function UpdateUser({ data, setView }) {
   const { id, name, surname, about } = data;
   const searchId = parseInt(id);
   const { inputs, changeHandler } = useForm({
@@ -35,9 +35,7 @@ export default function UpdateUser({ data }) {
       onSubmit={async (e) => {
         e.preventDefault();
         await updateUser();
-        Router.push({
-          pathname: `/account`,
-        });
+        setView(true);
       }}
     >
       <DisplayError error={updateError} />

@@ -7,7 +7,6 @@ export default function Account() {
   const changeView = () => setShowDetails(showDetails === true ? false : true);
   let body;
   const userData = useUser();
-  console.log(userData?.me);
   if (userData?.me) {
     const {
       me: { id, username, email, name, surname, about, active },
@@ -35,7 +34,7 @@ export default function Account() {
   else {
     return (
       <div>
-        <UpdateUser data={userData?.me} />
+        <UpdateUser data={userData?.me} setView={setShowDetails} />
         <button type="button" onClick={changeView}>
           Cancel
         </button>
