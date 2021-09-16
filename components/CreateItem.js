@@ -1,7 +1,8 @@
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
 
-import { ADD_ITEM, GET_ITEMS } from "../graphql/items";
+import { perPage } from "../config";
+import { ADD_ITEM, GET_GIVING, GET_ITEMS } from "../graphql/items";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 import FormStyles from "./styles/Form";
@@ -9,6 +10,12 @@ import { useUser } from "./User";
 
 export default function CreateItem() {
   const userData = useUser();
+  const input = (viewName) => ({
+    skip: 1 * perPage - perPage,
+    first: perPage,
+    userId: userData?.me?.id,
+    view: viewName,
+  });
   const { inputs, changeHandler, resetInitial } = useForm({
     name: "",
     file: "",
@@ -29,7 +36,10 @@ export default function CreateItem() {
       },
       file: inputs.file,
     },
-    refetchQueries: [{ query: GET_ITEMS, variables: { input: {} } }],
+    refetchQueries: [
+      { query: GET_ITEMS, variables: { input: input("items") } },
+      { query: GET_GIVING, variables: { input: input("giving") } },
+    ],
   });
   return (
     <FormStyles
