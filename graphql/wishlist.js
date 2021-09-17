@@ -23,7 +23,9 @@ export const ADD_ITEM_TO_WISHLIST = gql`
 
 export const GIVE_ITEM = gql`
   mutation GIVE_ITEM($userId: Int!, $itemId: Int!) {
-    giveItem(userId: $userId, itemId: $itemId)
+    giveItem(userId: $userId, itemId: $itemId) {
+      id
+    }
   }
 `;
 
