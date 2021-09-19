@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import Link from "next/link";
 
 import { GET_WISHLIST } from "../graphql/wishlist";
 import { WishlistItemStyles, WishlistStyles } from "./styles/WishlistStyles";
@@ -24,7 +25,9 @@ function WishlistItem({ item, i }) {
         />
       )}
       <div>
-        <h3>{item.name}</h3>
+        <h3>
+          <Link href={`/item/${item.id}`}>{item.name}</Link>
+        </h3>
         <p>{item.category}</p>
         <p>{item.state}</p>
       </div>

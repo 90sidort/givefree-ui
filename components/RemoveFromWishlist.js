@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { GET_ITEM } from "../graphql/items";
 
 import { GET_WISHLIST, REMOVE_FROM_WISHLIST } from "../graphql/wishlist";
 import { WishlistButtonStyles } from "./styles/WishlistStyles";
@@ -12,6 +13,7 @@ export default function RemoveFromWishlist({ itemId }) {
       variables: { itemId },
       refetchQueries: [
         { query: GET_WISHLIST, variables: { userId: userData?.me?.id } },
+        { query: GET_ITEM, variables: { id: itemId } },
       ],
     }
   );

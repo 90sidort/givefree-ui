@@ -31,6 +31,14 @@ export const GET_ITEM = gql`
       giver {
         username
         id
+        email
+      }
+      wishers {
+        id
+      }
+      taker {
+        id
+        username
       }
     }
   }

@@ -40,7 +40,7 @@ export default function ItemCard({ item, userid }) {
           {giverId === userid && (
             <Link href={{ pathname: "/update", query: { id: id } }}>Edit</Link>
           )}
-          {giverId !== userid && <AddToWishlist id={id} />}
+          {giverId !== userid && userid && <AddToWishlist id={id} />}
           {giverId === userid && status === "ONGOING" && (
             <button type="button" onClick={() => openWisherlist(id)} id={id}>
               Give
