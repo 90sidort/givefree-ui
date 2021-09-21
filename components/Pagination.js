@@ -16,7 +16,7 @@ export default function Pagination({ page, takerId, view }) {
     variables: { input: { takerId, view } },
     onError: () => setShowModal(true),
   });
-  const links = findLink(page);
+  const links = findLink(page, view);
   const pageCount = Math.ceil(data?.countItems / perPage);
   return (
     <>
