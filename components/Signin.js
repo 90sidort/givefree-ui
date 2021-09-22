@@ -59,7 +59,11 @@ export default function SigninComponent({ query, changeForm }) {
               data-test="inputPassword"
             />
           </fieldset>
-          <button type="button" onClick={resetInitial}>
+          <button
+            type="button"
+            onClick={resetInitial}
+            data-test="signinResetButton"
+          >
             Reset
           </button>
           <button type="submit" data-test="signinButton">
