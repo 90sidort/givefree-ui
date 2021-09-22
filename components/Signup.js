@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react/cjs/react.production.min";
+import Router from "next/router";
 import { ME, SIGN_UP } from "../graphql/user";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
@@ -18,6 +18,7 @@ export default function Signup({ query, changeForm }) {
   const [signup, { data, loading, error }] = useMutation(SIGN_UP, {
     variables: { ...inputs },
     refetchQueries: [{ query: ME }],
+    onError: () => true,
   });
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,6 +27,9 @@ export default function Signup({ query, changeForm }) {
         data: { signupUser },
       } = await signup();
       if (signupUser) resetInitial();
+      Router.push({
+        pathname: `/`,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -43,8 +47,9 @@ export default function Signup({ query, changeForm }) {
           value={inputs.username}
           onChange={changeHandler}
           required
+          data-test="inputUsername"
         />
-        <label htmlFor="username">Name</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           name="name"
@@ -52,8 +57,9 @@ export default function Signup({ query, changeForm }) {
           value={inputs.name}
           onChange={changeHandler}
           required
+          data-test="inputName"
         />
-        <label htmlFor="username">Surname</label>
+        <label htmlFor="surname">Surname</label>
         <input
           type="text"
           name="surname"
@@ -61,8 +67,9 @@ export default function Signup({ query, changeForm }) {
           value={inputs.surname}
           onChange={changeHandler}
           required
+          data-test="inputSurname"
         />
-        <label htmlFor="username">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
@@ -70,6 +77,7 @@ export default function Signup({ query, changeForm }) {
           value={inputs.email}
           onChange={changeHandler}
           required
+          data-test="inputEmail"
         />
         <label htmlFor="password">Password</label>
         <input
@@ -79,6 +87,7 @@ export default function Signup({ query, changeForm }) {
           value={inputs.password}
           onChange={changeHandler}
           required
+          data-test="inputPassword"
         />
         <label htmlFor="password">Repeat password</label>
         <input
@@ -88,21 +97,25 @@ export default function Signup({ query, changeForm }) {
           value={inputs.retype}
           onChange={changeHandler}
           required
+          data-test="inputRetype"
         />
-        <label htmlFor="username">About</label>
+        <label htmlFor="about">About</label>
         <input
           type="textarea"
           name="about"
           placeholder="Tell us something about yourself if you'd like to!"
           value={inputs.about}
           onChange={changeHandler}
+          data-test="inputAbout"
         />
       </fieldset>
-      <button type="button" onClick={resetInitial}>
+      <button type="button" onClick={resetInitial} data-test="resetPassForm">
         Reset
       </button>
-      <button type="submit">Sign up!</button>
-      <p onClick={() => changeForm("signin")}>
+      <button type="submit" data-type="signupButton">
+        Sign up!
+      </button>
+      <p onClick={() => changeForm("signin")} data-test="singinForm">
         Already have an account? Click here!
       </p>
     </FormStyles>

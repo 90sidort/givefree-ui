@@ -48,7 +48,7 @@ export default function ResetRequest({ query, changeForm }) {
         Reset
       </button>
       <button type="submit">Request reset!</button>
-      <p onClick={() => changeForm("signin")}>
+      <p onClick={() => changeForm("signin")} data-test="singinForm">
         Do not need password reset? Click here!
       </p>
     </FormStyles>

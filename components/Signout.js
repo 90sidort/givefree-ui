@@ -14,7 +14,7 @@ export default function Signout({ children }) {
     });
   };
   return (
-    <button type="button" onClick={handleSignout}>
+    <button type="button" onClick={handleSignout} data-test="signoutButton">
       Sign out
     </button>
   );

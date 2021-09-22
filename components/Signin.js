@@ -69,10 +69,10 @@ export default function SigninComponent({ query, changeForm }) {
           <button type="submit" data-test="signinButton">
             Sign in!
           </button>
-          <p onClick={() => changeForm("signup")}>
+          <p onClick={() => changeForm("signup")} data-test="signupForm">
             Do not have an account? Click here!
           </p>
-          <p onClick={() => changeForm("request")}>
+          <p onClick={() => changeForm("request")} data-test="resetPassForm">
             Forgott password? Click here!
           </p>
         </FormStyles>

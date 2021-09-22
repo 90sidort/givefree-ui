@@ -1,3 +1,4 @@
+import { graphqlLink, waitStandard } from "../variables/general";
 import {
   passwordInput,
   signButton,
@@ -7,15 +8,27 @@ import {
 
 Cypress.Commands.add("loginUI", (username, password) => {
   cy.visit("/");
-  cy.get(signButton, { timeout: 30000 }).click();
+  cy.get(signButton, { timeout: waitStandard }).click();
   cy.url().should("include", "/signin");
-  cy.get(usernameInput, { timeout: 30000 }).type(username);
-  cy.get(passwordInput, { timeout: 30000 }).type(password);
-  cy.get(signinButton, { timeout: 30000 }).click();
+  cy.get(usernameInput, { timeout: waitStandard }).type(username);
+  cy.get(passwordInput, { timeout: waitStandard }).type(password);
+  cy.get(signinButton, { timeout: waitStandard }).click();
+});
+
+Cypress.Commands.add("loginNoUI", (username, password) => {
+  cy.visit("/");
+  cy.request("POST", graphqlLink, {
+    operationName: "SIGN_IN",
+    variables: { username, password },
+    query:
+      "mutation SIGN_IN($username: String!, $password: String!) {\n  signinUser(password: $password, username: $username)\n}\n",
+  }).then((res) => {
+    cy.reload();
+  });
 });
 
 Cypress.Commands.add("mockDB", () => {
-  cy.request("POST", "http://localhost:4000/graphql", {
+  cy.request("POST", graphqlLink, {
     operationName: null,
     variables: {},
     query: "mutation {\n  mockDb\n}\n",
