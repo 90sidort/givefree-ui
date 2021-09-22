@@ -11,22 +11,56 @@ export default function Navigation() {
   const { openWishlist, wishlistCount } = useWishlist();
   return (
     <NavStyles>
-      <Link href="/items">Take</Link>
+      <Link href="/items">
+        <button type="button" data-test="sectionTake">
+          Take
+        </button>
+      </Link>
       {data?.me && (
         <>
-          <Link href="/give">Give</Link>
-          <button type="button" onClick={openWishlist}>
+          <Link href="/give">
+            <button type="button" data-test="sectionGive">
+              Give
+            </button>
+          </Link>
+          <button
+            type="button"
+            onClick={openWishlist}
+            data-test="sectionWishlist"
+          >
             Taking
             <WishlistCount count={wishlistCount} />
           </button>
-          <Link href="/giving">Giving</Link>
-          <Link href="/taken">Taken</Link>
-          <Link href="/given">Given</Link>
-          <Link href="/account">Account</Link>
+          <Link href="/giving">
+            <button type="button" data-test="sectionGiving">
+              Giving
+            </button>
+          </Link>
+          <Link href="/taken">
+            <button type="button" data-test="sectionTaken">
+              Taken
+            </button>
+          </Link>
+          <Link href="/given">
+            <button type="button" data-test="sectionGiven">
+              Given
+            </button>
+          </Link>
+          <Link href="/account">
+            <button type="button" data-test="sectionAccount">
+              Account
+            </button>
+          </Link>
           <Signout />
         </>
       )}
-      {!data?.me && <Link href="/signin">Sign in</Link>}
+      {!data?.me && (
+        <Link href="/signin">
+          <button type="button" data-test="sectionSign">
+            Sign in
+          </button>
+        </Link>
+      )}
     </NavStyles>
   );
 }

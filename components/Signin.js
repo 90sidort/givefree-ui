@@ -47,6 +47,7 @@ export default function SigninComponent({ query, changeForm }) {
               placeholder="Your username"
               value={inputs.username}
               onChange={changeHandler}
+              data-test="inputUsername"
             />
             <label htmlFor="password">Password</label>
             <input
@@ -55,12 +56,15 @@ export default function SigninComponent({ query, changeForm }) {
               placeholder="Your password"
               value={inputs.password}
               onChange={changeHandler}
+              data-test="inputPassword"
             />
           </fieldset>
           <button type="button" onClick={resetInitial}>
             Reset
           </button>
-          <button type="submit">Sign in!</button>
+          <button type="submit" data-test="signinButton">
+            Sign in!
+          </button>
           <p onClick={() => changeForm("signup")}>
             Do not have an account? Click here!
           </p>
