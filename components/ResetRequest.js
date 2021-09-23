@@ -4,6 +4,7 @@ import Router from "next/router";
 import { RESET_REQUEST } from "../graphql/user";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
+import Load from "./Load";
 import FormStyles from "./styles/Form";
 
 export default function ResetRequest({ query, changeForm }) {
@@ -12,6 +13,7 @@ export default function ResetRequest({ query, changeForm }) {
   });
   const [resetRequest, { data, loading, error }] = useMutation(RESET_REQUEST, {
     variables: { ...inputs },
+    onError: () => true,
   });
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,33 +31,37 @@ export default function ResetRequest({ query, changeForm }) {
       console.log(err);
     }
   }
-  if (loading) return <p>Loading...</p>;
   return (
-    <FormStyles method="POST" onSubmit={handleSubmit}>
-      <DisplayError error={error} />
-      {data?.requestReset && (
-        <p data-test="successReset">Success! Check your email!</p>
+    <>
+      {loading && <Load />}
+      {!loading && (
+        <FormStyles method="POST" onSubmit={handleSubmit}>
+          {error && <DisplayError error={error} />}
+          {data?.requestReset && (
+            <p data-test="successReset">Success! Check your email!</p>
+          )}
+          <fieldset>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email"
+              value={inputs.email}
+              onChange={changeHandler}
+              data-test="inputEmail"
+            />
+          </fieldset>
+          <button type="button" onClick={resetInitial}>
+            Reset
+          </button>
+          <button type="submit" data-test="resetPassBttn">
+            Request reset!
+          </button>
+          <p onClick={() => changeForm("signin")} data-test="singinForm">
+            Do not need password reset? Click here!
+          </p>
+        </FormStyles>
       )}
-      <fieldset>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email"
-          value={inputs.email}
-          onChange={changeHandler}
-          data-test="inputEmail"
-        />
-      </fieldset>
-      <button type="button" onClick={resetInitial}>
-        Reset
-      </button>
-      <button type="submit" data-test="resetPassBttn">
-        Request reset!
-      </button>
-      <p onClick={() => changeForm("signin")} data-test="singinForm">
-        Do not need password reset? Click here!
-      </p>
-    </FormStyles>
+    </>
   );
 }
