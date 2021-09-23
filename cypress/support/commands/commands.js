@@ -23,7 +23,7 @@ Cypress.Commands.add("loginNoUI", (username, password) => {
     query:
       "mutation SIGN_IN($username: String!, $password: String!) {\n  signinUser(password: $password, username: $username)\n}\n",
   }).then((res) => {
-    cy.reload();
+    cy.visit("/give");
   });
 });
 

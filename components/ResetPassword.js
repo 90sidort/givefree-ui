@@ -47,6 +47,7 @@ export default function ResetPassword({ token }) {
           placeholder="Your email"
           value={inputs.email}
           onChange={changeHandler}
+          data-test="inputEmail"
         />
         <label htmlFor="email">Password</label>
         <input

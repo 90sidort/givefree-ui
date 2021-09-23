@@ -109,7 +109,11 @@ export default function Signup({ query, changeForm }) {
           data-test="inputAbout"
         />
       </fieldset>
-      <button type="button" onClick={resetInitial} data-test="resetPassForm">
+      <button
+        type="button"
+        onClick={resetInitial}
+        data-test="signinResetButton"
+      >
         Reset
       </button>
       <button type="submit" data-type="signupButton">

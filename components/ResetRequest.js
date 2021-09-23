@@ -33,7 +33,9 @@ export default function ResetRequest({ query, changeForm }) {
   return (
     <FormStyles method="POST" onSubmit={handleSubmit}>
       <DisplayError error={error} />
-      {data?.requestReset && <p>Success! Check your email!</p>}
+      {data?.requestReset && (
+        <p data-test="successReset">Success! Check your email!</p>
+      )}
       <fieldset>
         <label htmlFor="email">Email</label>
         <input
@@ -42,12 +44,15 @@ export default function ResetRequest({ query, changeForm }) {
           placeholder="Your email"
           value={inputs.email}
           onChange={changeHandler}
+          data-test="inputEmail"
         />
       </fieldset>
       <button type="button" onClick={resetInitial}>
         Reset
       </button>
-      <button type="submit">Request reset!</button>
+      <button type="submit" data-test="resetPassBttn">
+        Request reset!
+      </button>
       <p onClick={() => changeForm("signin")} data-test="singinForm">
         Do not need password reset? Click here!
       </p>

@@ -9,9 +9,17 @@ export const aboutInput = 'input[data-test="inputAbout"]';
 export const validUsername = "normal_user";
 export const validPassword = "testtest2";
 export const invalidCredential = "nonexistent";
+export const normalEmail = "normal@test.com";
 export const signinButton = 'button[data-test="signinButton"]';
-export const errorWrongUser = "Error: User nonexistent does not exist!";
-export const errorNonmatchPassword = "Error: Passwords do not match!";
+export const errorWrongUser = "User nonexistent does not exist!";
+export const errorMissingUsername =
+  "Username has to be bewteen 4 and 200 characters long!";
+export const errorNonexistUser =
+  "User with email: nonexists@email.com does not exist!";
+export const errorNonmatchPassword = "Passwords have to match!";
+export const errorUserExists = (username) => `User ${username} already exists!`;
+export const errorEmailExists = (email) =>
+  `User with email ${email} already exists!`;
 export const errorWrongPass = "Password for user normal_user is incorrect!";
 export const signinResetBttn = 'button[data-test="signinResetButton"]';
 export const signoutButton = 'button[data-test="signoutButton"]';
@@ -19,3 +27,5 @@ export const signupRedirect = 'p[data-test="signupForm"]';
 export const signinRedirect = 'p[data-test="singinForm"]';
 export const resetPassRedirect = 'p[data-test="resetPassForm"]';
 export const buttonSignup = 'button[data-type="signupButton"]';
+export const resetPassBttn = 'button[data-test="resetPassBttn"]';
+export const successResetP = 'p[data-test="successReset"]';
