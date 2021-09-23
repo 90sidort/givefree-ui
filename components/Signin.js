@@ -15,6 +15,7 @@ export default function SigninComponent({ query, changeForm }) {
   const [signin, { data, loading, error }] = useMutation(SIGN_IN, {
     variables: { ...inputs },
     refetchQueries: [{ query: ME }],
+    onError: () => true,
   });
 
   async function handleSubmit(e) {
