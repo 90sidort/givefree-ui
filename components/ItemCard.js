@@ -15,11 +15,11 @@ export default function ItemCard({ item, userid }) {
     category,
     description,
     status,
-    giver: { id: giverId },
+    giver: { id: giverId }
   } = item;
   const { openWisherlist, wishlistCount } = useWishlist();
   return (
-    <ItemStyles>
+    <ItemStyles data-test="itemCard">
       {images?.length > 0 ? (
         images.map((image, i) => {
           return <img key={i} src={image.url} alt={image.alt} />;
@@ -31,10 +31,18 @@ export default function ItemCard({ item, userid }) {
         />
       )}
       <TitleStyles>
-        <Link href={`/item/${id}`}>{name}</Link>
+        <Link href={`/item/${id}`}>
+          <a data-test="itemLink">{name}</a>
+        </Link>
       </TitleStyles>
-      <CatTag>{category}</CatTag>
-      {description && <p>{description}</p>}
+      <CatTag data-test="categoryTag">{category}</CatTag>
+      {description && (
+        <p data-test="itemDescription">
+          {description.length > 80
+            ? `${description.slice(0, 80)}...`
+            : description}
+        </p>
+      )}
       {status !== "GIVEN" && (
         <div className="buttonList">
           {giverId === userid && (

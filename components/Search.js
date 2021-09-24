@@ -1,10 +1,10 @@
 import { useLazyQuery } from "@apollo/client";
 import { useRouter } from "next/dist/client/router";
 import { resetIdCounter, useCombobox } from "downshift";
+import { useEffect, useState } from "react";
 
 import { GET_ITEMS_SEARCH } from "../graphql/items";
 import { DropDown, DropDownItem, SearchStyles } from "./styles/DropDown";
-import { useEffect, useState } from "react";
 import Modal from "./Modal";
 
 export default function Search() {
@@ -15,7 +15,7 @@ export default function Search() {
     GET_ITEMS_SEARCH,
     {
       fetchPolicy: "no-cache",
-      onError: () => setShowModal(true),
+      onError: () => setShowModal(true)
     }
   );
   useEffect(() => {
@@ -24,9 +24,9 @@ export default function Search() {
         searchItems({
           variables: {
             input: {
-              name: input,
-            },
-          },
+              name: input
+            }
+          }
         });
       }, 1000);
       return () => clearTimeout(timer);
@@ -42,7 +42,7 @@ export default function Search() {
     getInputProps,
     getItemProps,
     getComboboxProps,
-    highlightedIndex,
+    highlightedIndex
   } = useCombobox({
     items,
     onInputValueChange(props) {
@@ -50,10 +50,10 @@ export default function Search() {
     },
     onSelectedItemChange({ selectedItem }) {
       router.push({
-        pathname: `/item/${selectedItem.id}`,
+        pathname: `/item/${selectedItem.id}`
       });
     },
-    itemToString: (item) => item?.name || "",
+    itemToString: item => item?.name || ""
   });
   return (
     <>
@@ -71,8 +71,9 @@ export default function Search() {
               type: "search",
               placeholder: "Search for an item",
               id: "search",
-              className: loading ? "loading" : null,
+              className: loading ? "loading" : null
             })}
+            data-test="searchItemsInput"
           />
         </div>
         <DropDown {...getMenuProps()}>
@@ -82,8 +83,10 @@ export default function Search() {
                 key={index}
                 {...getItemProps({ item, index })}
                 highlighted={index === highlightedIndex}
+                data-test="dropdownItem"
               >
                 <img
+                  data-test="searchItemImage"
                   src={
                     item.images.length > 0
                       ? item.images[0].url
@@ -99,10 +102,14 @@ export default function Search() {
               </DropDownItem>
             ))}
           {isOpen && !items.length && !loading && inputValue.length >= 3 && (
-            <DropDownItem>No results for {inputValue}</DropDownItem>
+            <DropDownItem data-test="dropdownItem">
+              No results for {inputValue}
+            </DropDownItem>
           )}
           {isOpen && !loading && inputValue.length < 3 && (
-            <DropDownItem>Needs at least three characters</DropDownItem>
+            <DropDownItem data-test="dropdownItem">
+              Needs at least three characters
+            </DropDownItem>
           )}
         </DropDown>
       </SearchStyles>

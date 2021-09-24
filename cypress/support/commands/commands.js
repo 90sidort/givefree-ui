@@ -1,9 +1,14 @@
-import { graphqlLink, waitStandard } from "../variables/general";
+import {
+  graphqlLink,
+  waitStandard,
+  prevPageButton,
+  nextPageButton
+} from "../variables/general";
 import {
   passwordInput,
   signButton,
   signinButton,
-  usernameInput,
+  usernameInput
 } from "../variables/sign";
 
 Cypress.Commands.add("loginUI", (username, password) => {
@@ -21,8 +26,8 @@ Cypress.Commands.add("loginNoUI", (username, password) => {
     operationName: "SIGN_IN",
     variables: { username, password },
     query:
-      "mutation SIGN_IN($username: String!, $password: String!) {\n  signinUser(password: $password, username: $username)\n}\n",
-  }).then((res) => {
+      "mutation SIGN_IN($username: String!, $password: String!) {\n  signinUser(password: $password, username: $username)\n}\n"
+  }).then(res => {
     cy.visit("/give");
   });
 });
@@ -31,8 +36,22 @@ Cypress.Commands.add("mockDB", () => {
   cy.request("POST", graphqlLink, {
     operationName: null,
     variables: {},
-    query: "mutation {\n  mockDb\n}\n",
-  }).then((res) => {
+    query: "mutation {\n  mockDb\n}\n"
+  }).then(res => {
     expect(res.body.data.mockDb).to.equal(true);
   });
+});
+
+Cypress.Commands.add("checkPageBttn", (prevDisable, nextDisable) => {
+  console.log(prevDisable, nextDisable);
+  cy.get(prevPageButton, { timeout: waitStandard }).should(
+    "have.attr",
+    "aria-disabled",
+    prevDisable
+  );
+  cy.get(nextPageButton, { timeout: waitStandard }).should(
+    "have.attr",
+    "aria-disabled",
+    nextDisable
+  );
 });

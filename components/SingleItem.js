@@ -15,12 +15,12 @@ export default function SingleItem({ id }) {
   const searchId = parseInt(id);
   const { data, loading, error } = useQuery(GET_ITEM, {
     variables: { id: searchId },
-    onError: () => true,
+    onError: () => true
   });
   if (data) {
     const { getItem } = data;
     item = getItem;
-    item.wishers.forEach((wisher) => {
+    item.wishers.forEach(wisher => {
       if (wisher.id === user?.me?.id) alreadyWished = true;
     });
   }
@@ -48,7 +48,7 @@ export default function SingleItem({ id }) {
             })}
           {item && (
             <div className="details">
-              <h2>{`${item.category} > ${item.name}`}</h2>
+              <h2 data-test="itemDetailsName">{`${item.category} > ${item.name}`}</h2>
               <h4>{`From: ${item.giver.username}`}</h4>
               <h5>{`State: ${item.state}`}</h5>
               {item.description && <p>{item.description}</p>}

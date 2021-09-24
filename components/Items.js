@@ -36,12 +36,12 @@ export default function Items({ page, view }) {
         skip: page * perPage - perPage,
         first: perPage,
         userId: userData?.me?.id,
-        view,
-      },
+        view
+      }
     },
     onError: () => {
       setShowModal(true);
-    },
+    }
   });
   return (
     <div>
