@@ -13,8 +13,8 @@ export default function RemoveFromWishlist({ itemId }) {
       variables: { itemId },
       refetchQueries: [
         { query: GET_WISHLIST, variables: { userId: userData?.me?.id } },
-        { query: GET_ITEM, variables: { id: itemId } },
-      ],
+        { query: GET_ITEM, variables: { id: itemId } }
+      ]
     }
   );
   return (
@@ -22,6 +22,7 @@ export default function RemoveFromWishlist({ itemId }) {
       type="button"
       onClick={removeFromWishlist}
       disabled={loading}
+      data-test="removeFormWishlist"
     >
       x
     </WishlistButtonStyles>

@@ -16,10 +16,10 @@ export default function AcceptWisher({ wisherId, itemId }) {
     refetchQueries: [
       { query: GET_WISHERS, variables: { itemId } },
       { query: GET_GIVING, variables: { input: { view: "giving" } } },
-      { query: GET_GIVEN, variables: { input: { view: "given" } } },
+      { query: GET_GIVEN, variables: { input: { view: "given" } } }
     ],
     onError: () => setShowModal(true),
-    update: update,
+    update: update
   });
   return (
     <>

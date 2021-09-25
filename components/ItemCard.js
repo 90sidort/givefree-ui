@@ -46,11 +46,18 @@ export default function ItemCard({ item, userid }) {
       {status !== "GIVEN" && (
         <div className="buttonList">
           {giverId === userid && (
-            <Link href={{ pathname: "/update", query: { id: id } }}>Edit</Link>
+            <Link href={{ pathname: "/update", query: { id: id } }}>
+              <a data-test="editItemButton">Edit</a>
+            </Link>
           )}
           {giverId !== userid && userid && <AddToWishlist id={id} />}
           {giverId === userid && status === "ONGOING" && (
-            <button type="button" onClick={() => openWisherlist(id)} id={id}>
+            <button
+              type="button"
+              onClick={() => openWisherlist(id)}
+              id={id}
+              data-test="giveItemButton"
+            >
               Give
             </button>
           )}

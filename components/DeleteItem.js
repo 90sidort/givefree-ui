@@ -13,7 +13,7 @@ export default function DeleteItem({ id, children }) {
   const numId = parseInt(id);
   const [deleteItem, { loading }] = useMutation(DELETE_ITEM, {
     variables: { id: numId },
-    update: update,
+    update: update
   });
   return (
     <>
@@ -21,6 +21,7 @@ export default function DeleteItem({ id, children }) {
         type="button"
         disabled={loading}
         onClick={() => setShowModal(true)}
+        data-test="deleteItemButton"
       >
         {children}
       </button>
@@ -29,7 +30,7 @@ export default function DeleteItem({ id, children }) {
         title="Are you sure?"
         confirm="Delete"
         onClose={() => setShowModal(false)}
-        onConfirm={() => deleteItem().catch((err) => alert(err.message))}
+        onConfirm={() => deleteItem().catch(err => alert(err.message))}
       >
         Item will be irreversibly deleted!
       </Modal>

@@ -4,7 +4,7 @@ import { GET_ITEM } from "../graphql/items";
 import {
   ADD_ITEM_TO_WISHLIST,
   GET_WISHERS,
-  GET_WISHLIST,
+  GET_WISHLIST
 } from "../graphql/wishlist";
 import Modal from "./Modal";
 import { useUser } from "./User";
@@ -20,16 +20,21 @@ export default function AddToWishlist({ id }) {
       refetchQueries: [
         { query: GET_WISHLIST, variables: { userId: userData?.me?.id } },
         { query: GET_WISHERS, variables: { itemId: intId } },
-        { query: GET_ITEM, variables: { id: intId } },
+        { query: GET_ITEM, variables: { id: intId } }
       ],
-      onError: (error) => {
+      onError: error => {
         setShowModal(true);
-      },
+      }
     }
   );
   return (
     <>
-      <button disabled={loading} type="button" onClick={addToWishlist}>
+      <button
+        disabled={loading}
+        type="button"
+        onClick={addToWishlist}
+        data-test="addToWishlistBttn"
+      >
         + Add{loading && "ing"} to wishlist
       </button>
       <Modal

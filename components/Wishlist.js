@@ -25,7 +25,7 @@ function WishlistItem({ item, i }) {
         />
       )}
       <div>
-        <h3>
+        <h3 data-test={`itemTitle_${item.name}`}>
           <Link href={`/item/${item.id}`}>{item.name}</Link>
         </h3>
         <p>{item.category}</p>
@@ -41,7 +41,7 @@ export default function Wishlist() {
   const { wishlistOpen, closeWishlist, setWishlistCount } = useWishlist();
   const { data, loading, error } = useQuery(GET_WISHLIST, {
     variables: { userId: me?.me?.id },
-    skip: me?.me?.id === undefined,
+    skip: me?.me?.id === undefined
   });
   if (!me || !data) return null;
   if (data?.getWishlist?.length > 0)

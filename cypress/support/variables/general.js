@@ -8,3 +8,4 @@ export const dropdownItem = 'div[data-test="dropdownItem"]';
 export const searchItemImage = 'img[data-test="searchItemImage"]';
 export const prevPageButton = 'a[data-test="prevPage"]';
 export const nextPageButton = 'a[data-test="nextPage"]';
+export const sectionWishlist = 'button[data-test="sectionWishlist"]';
