@@ -25,10 +25,10 @@ export default function Wisherlist() {
     wisherlistOpen,
     closeWisherlist,
     setWisherlistCount,
-    currentItem,
+    currentItem
   } = useWishlist();
   const { data, loading, error } = useQuery(GET_WISHERS, {
-    variables: { itemId: currentItem },
+    variables: { itemId: currentItem }
   });
   if (!data) return null;
   if (data?.getWishers?.length > 0)
@@ -39,7 +39,12 @@ export default function Wisherlist() {
       {loading && <p>Loading...</p>}
       <header>
         <Supreme>Possible takers</Supreme>
-        <CloseButtonStyles onClick={closeWisherlist}>&times;</CloseButtonStyles>
+        <CloseButtonStyles
+          onClick={closeWisherlist}
+          data-test="closeWisherBttn"
+        >
+          &times;
+        </CloseButtonStyles>
       </header>
       <ul>
         {data.getWishers.length > 0 ? (

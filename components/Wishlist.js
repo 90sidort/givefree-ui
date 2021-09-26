@@ -52,7 +52,9 @@ export default function Wishlist() {
       {loading && <p>Loading...</p>}
       <header>
         <Supreme>{me?.me?.username}'s wishlist</Supreme>
-        <CloseButtonStyles onClick={closeWishlist}>&times;</CloseButtonStyles>
+        <CloseButtonStyles onClick={closeWishlist} data-test="closeWishBttn">
+          &times;
+        </CloseButtonStyles>
       </header>
       <ul>
         {data.getWishlist.length > 0 ? (

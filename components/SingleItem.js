@@ -56,7 +56,9 @@ export default function SingleItem({ id }) {
                 user?.me?.id &&
                 item.status === "ONGOING" &&
                 !alreadyWished && <AddToWishlist id={id} />}
-              {alreadyWished && <p>{`Email: ${item.giver.email}`}</p>}
+              {alreadyWished && (
+                <p data-test="emailParagraph">{`Email: ${item.giver.email}`}</p>
+              )}
               {item?.taker?.username && (
                 <p>{`Given to: ${item.taker.username}`}</p>
               )}

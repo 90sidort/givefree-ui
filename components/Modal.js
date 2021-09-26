@@ -4,7 +4,7 @@ import {
   StyledModal,
   StyledModalHeader,
   StyledModalOverlay,
-  StyledModalBody,
+  StyledModalBody
 } from "./styles/ModalStyles";
 
 function Modal({ show, onClose, children, title, onConfirm, confirm }) {
@@ -14,11 +14,11 @@ function Modal({ show, onClose, children, title, onConfirm, confirm }) {
     setIsBrowser(true);
   }, []);
 
-  const handleCloseClick = (e) => {
+  const handleCloseClick = e => {
     e.preventDefault();
     onClose();
   };
-  const handleConfirmClick = (e) => {
+  const handleConfirmClick = e => {
     e.preventDefault();
     onConfirm();
     onClose();
@@ -26,21 +26,21 @@ function Modal({ show, onClose, children, title, onConfirm, confirm }) {
 
   const modalContent = show ? (
     <StyledModalOverlay>
-      <StyledModal>
+      <StyledModal data-test="modalElement">
         <StyledModalHeader>
           <a href="#" onClick={handleCloseClick}>
             x
           </a>
         </StyledModalHeader>
         {title && <h2>{title}</h2>}
-        <StyledModalBody>{children}</StyledModalBody>
+        <StyledModalBody data-test="modalContent">{children}</StyledModalBody>
         {onConfirm && (
           <a href="#" onClick={handleConfirmClick}>
             {confirm}
           </a>
         )}
         {` `}
-        <a href="#" onClick={handleCloseClick}>
+        <a href="#" onClick={handleCloseClick} data-test="closeModal">
           Close
         </a>
       </StyledModal>

@@ -9,3 +9,6 @@ export const searchItemImage = 'img[data-test="searchItemImage"]';
 export const prevPageButton = 'a[data-test="prevPage"]';
 export const nextPageButton = 'a[data-test="nextPage"]';
 export const sectionWishlist = 'button[data-test="sectionWishlist"]';
+export const modalElement = 'div[data-test="modalElement"]';
+export const closeModal = 'a[data-test="closeModal"]';
+export const modalContent = 'div[data-test="modalContent"]';
