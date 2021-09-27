@@ -22,8 +22,11 @@ export const itemDescriptionTextarea =
   'textarea[data-test="itemDescriptionTextarea"]';
 export const resetItemBttn = 'button[data-test="resetItemBttn"]';
 export const addItemBttn = 'button[data-test="addItemBttn"]';
+export const imagePlaceholder = 'img[data-test="imagePlaceholder"]';
 export const pngExample = "png_example.png";
 export const errorUnauthorized = "Unauthorized! You need to log in!";
+export const errorName = "is not between 4 and 400 characters long!";
+export const errorDesc = "Description has to be between 5 and 2000 characters!";
 export const itemDetailsImage = 'img[data-test="itemDetailsImage"]';
 
 export const addToWishlistReq = idItem => ({

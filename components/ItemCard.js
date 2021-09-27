@@ -27,7 +27,8 @@ export default function ItemCard({ item, userid }) {
       ) : (
         <img
           src={"http://localhost:4000/placeholder.jpg"}
-          alt={"placeholder"}
+          alt="placeholder"
+          data-test="imagePlaceholder"
         />
       )}
       <TitleStyles>

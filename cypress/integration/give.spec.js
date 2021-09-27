@@ -21,7 +21,11 @@ import {
   itemDetailsName,
   itemDetailsImage,
   errorUnauthorized,
-  itemLink
+  itemLink,
+  errorName,
+  errorDesc,
+  imagePlaceholder,
+  itemCard
 } from "../support/variables/item";
 import { validUsername, validPassword } from "../support/variables/sign";
 
@@ -31,45 +35,63 @@ describe("Tests for search give item functionality", () => {
       cy.wait(500);
     });
   });
-  // it("Should not be able to give items without login in", () => {
-  //   cy.visit("/give");
-  //   cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
-  //   cy.get(itemFileInput, { timeout: waitStandard }).attachFile(pngExample);
-  //   cy.get(addItemBttn, { timeout: waitStandard }).click();
-  //   cy.get(errorDisplay, { timeout: waitStandard })
-  //     .invoke("text")
-  //     .should("include", errorUnauthorized);
-  // });
-  // it("Should show given item in take & giving section", () => {
-  //   cy.intercept("POST", "**/graphql").as("request");
-  //   cy.loginNoUI(validUsername, validPassword);
-  //   cy.get(navGive, { timeout: waitStandard }).click();
-  //   cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
-  //   cy.get(itemFileInput, { timeout: waitStandard }).attachFile(pngExample);
-  //   cy.get(addItemBttn, { timeout: waitStandard }).click();
-  //   cy.wait("@request").then(interception => {
-  //     expect(interception.response.body.data.addItem.name).to.eq("new shoes");
-  //     cy.get(itemDetailsName, { timeout: waitStandard })
-  //       .should("be.visible")
-  //       .invoke("text")
-  //       .should("include", "new shoes");
-  //     cy.get(itemDetailsImage, { timeout: waitStandard }).should("be.visible");
-  //     cy.url().should(
-  //       "include",
-  //       `/item/${interception.response.body.data.addItem.id}`
-  //     );
-  //     cy.get(navTake, { timeout: waitStandard }).click();
-  //     cy.get(itemLink, { timeout: waitStandard })
-  //       .eq(0)
-  //       .invoke("text")
-  //       .should("include", "new shoes");
-  //     cy.get(navGiving, { timeout: waitStandard }).click();
-  //     cy.get(itemLink, { timeout: waitStandard })
-  //       .eq(0)
-  //       .invoke("text")
-  //       .should("include", "new shoes");
-  //   });
-  // });
+  it("Should not be able to give items without login in", () => {
+    cy.visit("/give");
+    cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
+    cy.get(itemFileInput, { timeout: waitStandard }).attachFile(pngExample);
+    cy.get(addItemBttn, { timeout: waitStandard }).click();
+    cy.get(errorDisplay, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", errorUnauthorized);
+  });
+  it("Should not be able to give items without mandatory data", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).click();
+    cy.get(addItemBttn, { timeout: waitStandard }).click();
+    cy.get(errorDisplay, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", errorName);
+  });
+  it("Should not be able to give items without invalid nonmandatory data", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).click();
+    cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
+    cy.get(itemDescriptionTextarea, { timeout: waitStandard }).type("abc");
+    cy.get(addItemBttn, { timeout: waitStandard }).click();
+    cy.get(errorDisplay, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", errorDesc);
+  });
+  it("Should show given item in take & giving section", () => {
+    cy.intercept("POST", "**/graphql").as("request");
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).click();
+    cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
+    cy.get(itemFileInput, { timeout: waitStandard }).attachFile(pngExample);
+    cy.get(addItemBttn, { timeout: waitStandard }).click();
+    cy.wait("@request").then(interception => {
+      expect(interception.response.body.data.addItem.name).to.eq("new shoes");
+      cy.get(itemDetailsName, { timeout: waitStandard })
+        .should("be.visible")
+        .invoke("text")
+        .should("include", "new shoes");
+      cy.get(itemDetailsImage, { timeout: waitStandard }).should("be.visible");
+      cy.url().should(
+        "include",
+        `/item/${interception.response.body.data.addItem.id}`
+      );
+      cy.get(navTake, { timeout: waitStandard }).click();
+      cy.get(itemLink, { timeout: waitStandard })
+        .eq(0)
+        .invoke("text")
+        .should("include", "new shoes");
+      cy.get(navGiving, { timeout: waitStandard }).click();
+      cy.get(itemLink, { timeout: waitStandard })
+        .eq(0)
+        .invoke("text")
+        .should("include", "new shoes");
+    });
+  });
   it("Should not show draft item in take section", () => {
     cy.intercept("POST", "**/graphql").as("request");
     cy.loginNoUI(validUsername, validPassword);
@@ -106,5 +128,19 @@ describe("Tests for search give item functionality", () => {
         .invoke("text")
         .should("include", "new socks");
     });
+  });
+  it("Should be able to give item without image", () => {
+    cy.intercept("POST", "**/graphql").as("request");
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).click();
+    cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
+    cy.get(addItemBttn, { timeout: waitStandard }).click();
+    cy.get(itemDetailsImage, { timeout: waitStandard }).should("not.exist");
+    cy.get(navTake, { timeout: waitStandard }).click();
+    cy.get(itemLink, { timeout: waitStandard })
+      .eq(0)
+      .invoke("text")
+      .should("include", "new shoes");
+    cy.get(itemCard, { timeout: waitStandard }).children(imagePlaceholder);
   });
 });

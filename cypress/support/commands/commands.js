@@ -44,7 +44,6 @@ Cypress.Commands.add("mockDB", () => {
 });
 
 Cypress.Commands.add("checkPageBttn", (prevDisable, nextDisable) => {
-  console.log(prevDisable, nextDisable);
   cy.get(prevPageButton, { timeout: waitStandard }).should(
     "have.attr",
     "aria-disabled",
