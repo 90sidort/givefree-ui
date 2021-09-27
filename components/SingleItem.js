@@ -43,6 +43,7 @@ export default function SingleItem({ id }) {
                   alt={image.alt}
                   width="50%"
                   height="50%"
+                  data-test="itemDetailsImage"
                 />
               );
             })}

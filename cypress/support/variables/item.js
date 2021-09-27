@@ -13,6 +13,19 @@ export const wishlistItemTitle = name => `h3[data-test="itemTitle_${name}"]`;
 export const closeWisherBttn = 'button[data-test="closeWisherBttn"]';
 export const closeWishBttn = 'button[data-test="closeWishBttn"]';
 export const emailParagraph = 'p[data-test="emailParagraph"]';
+export const itemNameInput = 'input[data-test="itemNameInput"]';
+export const itemFileInput = 'input[data-test="itemFileInput"]';
+export const itemStateSelect = 'select[data-test="itemStateSelect"]';
+export const itemCategorySelect = 'select[data-test="itemCategorySelect"]';
+export const itemStatusSelect = 'select[data-test="itemStatusSelect"]';
+export const itemDescriptionTextarea =
+  'textarea[data-test="itemDescriptionTextarea"]';
+export const resetItemBttn = 'button[data-test="resetItemBttn"]';
+export const addItemBttn = 'button[data-test="addItemBttn"]';
+export const pngExample = "png_example.png";
+export const errorUnauthorized = "Unauthorized! You need to log in!";
+export const itemDetailsImage = 'img[data-test="itemDetailsImage"]';
+
 export const addToWishlistReq = idItem => ({
   operationName: "ADD_ITEM_TO_WISHLIST",
   variables: {
