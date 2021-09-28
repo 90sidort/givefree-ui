@@ -61,7 +61,7 @@ export default function SingleItem({ id }) {
                 <p data-test="emailParagraph">{`Email: ${item.giver.email}`}</p>
               )}
               {item?.taker?.username && (
-                <p>{`Given to: ${item.taker.username}`}</p>
+                <p data-test="givenToPar">{`Given to: ${item.taker.username}`}</p>
               )}
             </div>
           )}

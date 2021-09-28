@@ -38,7 +38,7 @@ export default function Wisherlist() {
       <DisplayError error={error} />
       {loading && <p>Loading...</p>}
       <header>
-        <Supreme>Possible takers</Supreme>
+        <Supreme data-test="possibleTakersH3">Possible takers</Supreme>
         <CloseButtonStyles
           onClick={closeWisherlist}
           data-test="closeWisherBttn"
@@ -52,7 +52,7 @@ export default function Wisherlist() {
             <WisherItem wisher={wisher} i={i} key={i} itemId={currentItem} />
           ))
         ) : (
-          <p>No possible takers!</p>
+          <p data-test="noTakers">No possible takers!</p>
         )}
       </ul>
     </WishlistStyles>

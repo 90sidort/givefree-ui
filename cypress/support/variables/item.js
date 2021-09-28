@@ -30,6 +30,10 @@ export const errorDesc = "Description has to be between 5 and 2000 characters!";
 export const itemDetailsImage = 'img[data-test="itemDetailsImage"]';
 export const updateItemBttn = 'button[data-test="updateItemButton"]';
 export const confirmBttn = 'a[data-test="confirmBttn"]';
+export const possibleTakersH3 = 'h3[data-test="possibleTakersH3"]';
+export const noTakerPar = 'p[data-test="noTakers"]';
+export const acceptUserOffer = 'button[data-test="acceptUserOffer"]';
+export const givenToPar = 'p[data-test="givenToPar"]';
 
 export const addToWishlistReq = idItem => ({
   operationName: "ADD_ITEM_TO_WISHLIST",

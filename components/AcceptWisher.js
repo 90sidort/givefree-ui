@@ -27,6 +27,7 @@ export default function AcceptWisher({ wisherId, itemId }) {
         type="button"
         onClick={acceptWisher}
         disabled={loading}
+        data-test="acceptUserOffer"
       >
         &#10003;
       </WishlistButtonStyles>

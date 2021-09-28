@@ -7,7 +7,8 @@ import {
   navTake,
   errorDisplay,
   navGiving,
-  modalElement
+  modalElement,
+  navGiven
 } from "../support/variables/general";
 
 import {
@@ -31,7 +32,13 @@ import {
   editItemButton,
   updateItemBttn,
   deleteItemButton,
-  confirmBttn
+  confirmBttn,
+  giveItemButton,
+  possibleTakersH3,
+  noTakerPar,
+  closeWisherBttn,
+  acceptUserOffer,
+  givenToPar
 } from "../support/variables/item";
 import { validUsername, validPassword } from "../support/variables/sign";
 
@@ -208,5 +215,43 @@ describe("Tests for search give item functionality", () => {
           .should("not.include", "toBeDeleted");
       });
     });
+  });
+  it("Should show no takers if nobody added item to wishlist", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.visit("/items");
+    cy.get('button[id="11219"]', { timeout: waitStandard }).click();
+    cy.get(possibleTakersH3, { timeout: waitStandard }).should("be.visible");
+    cy.get(noTakerPar, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", "No possible takers");
+    cy.get(closeWisherBttn, { timeout: waitStandard }).click();
+    cy.get(possibleTakersH3, { timeout: waitStandard }).should(
+      "not.be.visible"
+    );
+  });
+  it("Should be able to give item to possible taker", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.visit("/items");
+    cy.get('button[id="11220"]', { timeout: waitStandard }).click();
+    cy.get(possibleTakersH3, { timeout: waitStandard }).should("be.visible");
+    cy.get(acceptUserOffer, { timeout: waitStandard }).should("have.length", 5);
+    cy.get(acceptUserOffer, { timeout: waitStandard })
+      .eq(0)
+      .click();
+    cy.get(closeWisherBttn, { timeout: waitStandard }).click();
+    cy.get('button[id="11220"]', { timeout: waitStandard }).should("not.exist");
+    cy.get(navGiven).click();
+    cy.url().should("include", `/given`);
+    cy.get(itemLink, { timeout: waitStandard })
+      .eq(0)
+      .invoke("text")
+      .should("include", "Super extra shorts two!");
+    cy.get(itemLink, { timeout: waitStandard })
+      .eq(0)
+      .click();
+    cy.get(givenToPar, { timeout: waitStandard })
+      .eq(0)
+      .invoke("text")
+      .should("include", "Given to: bfyfe3c");
   });
 });
