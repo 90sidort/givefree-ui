@@ -6,7 +6,8 @@ import {
   navGive,
   navTake,
   errorDisplay,
-  navGiving
+  navGiving,
+  modalElement
 } from "../support/variables/general";
 
 import {
@@ -25,7 +26,12 @@ import {
   errorName,
   errorDesc,
   imagePlaceholder,
-  itemCard
+  itemCard,
+  addItemReq,
+  editItemButton,
+  updateItemBttn,
+  deleteItemButton,
+  confirmBttn
 } from "../support/variables/item";
 import { validUsername, validPassword } from "../support/variables/sign";
 
@@ -142,5 +148,65 @@ describe("Tests for search give item functionality", () => {
       .invoke("text")
       .should("include", "new shoes");
     cy.get(itemCard, { timeout: waitStandard }).children(imagePlaceholder);
+  });
+  it("Should be able to edit created item", () => {
+    cy.loginNoUI(validUsername, validPassword).then(res => {
+      const token = res.document.cookie.split("token=")[1];
+      cy.request({
+        method: "POST",
+        url: "http://localhost:4000/graphql",
+        body: { ...addItemReq },
+        headers: { token }
+      }).then(() => {
+        cy.visit("/give");
+        cy.get(navTake, { timeout: waitStandard }).click();
+        cy.url().should("include", `/items`);
+        cy.get(editItemButton, { timeout: waitStandard })
+          .eq(0)
+          .click();
+        cy.get(itemNameInput, { timeout: waitStandard }).type("changed");
+        cy.get(updateItemBttn, { timeout: waitStandard }).click();
+        cy.get(itemDetailsName, { timeout: waitStandard })
+          .invoke("text")
+          .should("include", "changed");
+        cy.get(navTake, { timeout: waitStandard }).click();
+        cy.get(itemLink, { timeout: waitStandard })
+          .eq(0)
+          .invoke("text")
+          .should("include", "changed");
+      });
+    });
+  });
+  it("Should be able to delete created item", () => {
+    const itemTBDeleted = { ...addItemReq };
+    itemTBDeleted.variables.item.name = "toBeDeleted";
+    cy.loginNoUI(validUsername, validPassword).then(res => {
+      const token = res.document.cookie.split("token=")[1];
+      cy.request({
+        method: "POST",
+        url: "http://localhost:4000/graphql",
+        body: { ...itemTBDeleted },
+        headers: { token }
+      }).then(() => {
+        cy.visit("/give");
+        cy.get(navTake, { timeout: waitStandard }).click();
+        cy.url().should("include", `/items`);
+        cy.get(itemLink, { timeout: waitStandard })
+          .eq(0)
+          .invoke("text")
+          .should("include", "toBeDeleted");
+        cy.get(deleteItemButton, { timeout: waitStandard })
+          .eq(0)
+          .click();
+        cy.get(modalElement, { timeout: waitStandard }).should("be.visible");
+        cy.get(confirmBttn, { timeout: waitStandard }).click();
+        cy.get(modalElement, { timeout: waitStandard }).should("not.exist");
+        cy.wait(500);
+        cy.get(itemLink, { timeout: waitStandard })
+          .eq(0)
+          .invoke("text")
+          .should("not.include", "toBeDeleted");
+      });
+    });
   });
 });

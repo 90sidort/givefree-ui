@@ -35,7 +35,7 @@ function Modal({ show, onClose, children, title, onConfirm, confirm }) {
         {title && <h2>{title}</h2>}
         <StyledModalBody data-test="modalContent">{children}</StyledModalBody>
         {onConfirm && (
-          <a href="#" onClick={handleConfirmClick}>
+          <a href="#" onClick={handleConfirmClick} data-test="confirmBttn">
             {confirm}
           </a>
         )}

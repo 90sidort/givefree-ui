@@ -28,6 +28,8 @@ export const errorUnauthorized = "Unauthorized! You need to log in!";
 export const errorName = "is not between 4 and 400 characters long!";
 export const errorDesc = "Description has to be between 5 and 2000 characters!";
 export const itemDetailsImage = 'img[data-test="itemDetailsImage"]';
+export const updateItemBttn = 'button[data-test="updateItemButton"]';
+export const confirmBttn = 'a[data-test="confirmBttn"]';
 
 export const addToWishlistReq = idItem => ({
   operationName: "ADD_ITEM_TO_WISHLIST",
@@ -37,3 +39,19 @@ export const addToWishlistReq = idItem => ({
   query:
     "mutation ADD_ITEM_TO_WISHLIST($itemId: Int!) {\n  addToWishlist(itemId: $itemId)\n}\n"
 });
+export const addItemReq = {
+  operationName: "ADD_ITEM",
+  variables: {
+    item: {
+      name: "newTestItem",
+      state: "GOOD",
+      category: "OTHER",
+      status: "ONGOING",
+      giverId: 11123,
+      description: ""
+    },
+    file: ""
+  },
+  query:
+    "mutation ADD_ITEM($item: ItemInput!, $file: FileUpload) {\n  addItem(item: $item, file: $file) {\n    name\n    id\n    description\n    category\n    images {\n      url\n      alt\n      __typename\n    }\n    __typename\n  }\n}\n"
+};

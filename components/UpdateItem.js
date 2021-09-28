@@ -16,13 +16,13 @@ export default function UpdateItem({ id }) {
   const { data: getData, loading: getLoading, error: getError } = useQuery(
     GET_ITEM,
     {
-      variables: { id: searchId },
+      variables: { id: searchId }
     }
   );
   const { inputs, changeHandler } = useForm(getData?.getItem);
   const [
     updateItem,
-    { data: updateData, loading: updateLoading, error: updateError },
+    { data: updateData, loading: updateLoading, error: updateError }
   ] = useMutation(UPDATE_ITEM, {
     variables: {
       id: searchId,
@@ -31,19 +31,19 @@ export default function UpdateItem({ id }) {
         state: inputs.state,
         status: inputs.status,
         category: inputs.category,
-        description: inputs.description,
-      },
+        description: inputs.description
+      }
     },
-    refetchQueries: [{ query: GET_ITEM, variables: { id: searchId } }],
+    refetchQueries: [{ query: GET_ITEM, variables: { id: searchId } }]
   });
   if (getLoading) return <p>Loading...</p>;
   return (
     <FormStyles
-      onSubmit={async (e) => {
+      onSubmit={async e => {
         e.preventDefault();
         await updateItem();
         Router.push({
-          pathname: `/item/${id}`,
+          pathname: `/item/${id}`
         });
       }}
     >
@@ -61,6 +61,7 @@ export default function UpdateItem({ id }) {
             placeholder="Name"
             value={inputs.name}
             onChange={changeHandler}
+            data-test="itemNameInput"
           />
         </label>
         <label htmlFor="state">
@@ -71,6 +72,7 @@ export default function UpdateItem({ id }) {
             name="state"
             value={inputs.state}
             onChange={changeHandler}
+            data-test="itemStateSelect"
           >
             {optionsState}
           </select>
@@ -83,6 +85,7 @@ export default function UpdateItem({ id }) {
             name="status"
             value={inputs.status}
             onChange={changeHandler}
+            data-test="itemStatusSelect"
           >
             {optionsStatus}
           </select>
@@ -95,6 +98,7 @@ export default function UpdateItem({ id }) {
             name="category"
             value={inputs.category}
             onChange={changeHandler}
+            data-test="itemCategorySelect"
           >
             {optionsCategory}
           </select>
@@ -109,10 +113,13 @@ export default function UpdateItem({ id }) {
             placeholder="description"
             value={inputs.description}
             onChange={changeHandler}
+            data-test="itemDescriptionTextarea"
           />
         </label>
       </fieldset>
-      <button type="submit">Update item</button>
+      <button type="submit" data-test="updateItemButton">
+        Update item
+      </button>
     </FormStyles>
   );
 }
