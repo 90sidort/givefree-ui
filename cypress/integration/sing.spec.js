@@ -1,7 +1,7 @@
 import {
   errorDisplay,
   navGive,
-  waitStandard,
+  waitStandard
 } from "../support/variables/general";
 import {
   buttonSignup,
@@ -29,10 +29,10 @@ import {
   surnameInput,
   usernameInput,
   validPassword,
-  validUsername,
+  validUsername
 } from "../support/variables/sign";
 
-describe("Test for signin/ signup view", () => {
+describe("Test for signin/ signup functionalities", () => {
   before(() => {
     cy.mockDB().then(() => {
       cy.wait(500);

@@ -9,7 +9,7 @@ import {
 import { itemDetailsName } from "../support/variables/item";
 import { validUsername, validPassword } from "../support/variables/sign";
 
-describe("Tests for search items functionality", () => {
+describe("Tests for search functionalities", () => {
   before(() => {
     cy.mockDB().then(() => {
       cy.wait(500);

@@ -32,7 +32,7 @@ import {
 } from "../support/variables/item";
 import { validUsername, validPassword } from "../support/variables/sign";
 
-describe("Tests for take view", () => {
+describe("Tests for take item functionalities", () => {
   before(() => {
     cy.mockDB().then(() => {
       cy.wait(500);

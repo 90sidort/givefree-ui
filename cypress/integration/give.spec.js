@@ -42,7 +42,7 @@ import {
 } from "../support/variables/item";
 import { validUsername, validPassword } from "../support/variables/sign";
 
-describe("Tests for search give item functionality", () => {
+describe("Tests for give item functionalities", () => {
   before(() => {
     cy.mockDB().then(() => {
       cy.wait(500);
