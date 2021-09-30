@@ -7,6 +7,7 @@ import {
 } from "../support/variables/general";
 
 import { itemDetailsName } from "../support/variables/item";
+
 import { validUsername, validPassword } from "../support/variables/sign";
 
 describe("Tests for search functionalities", () => {

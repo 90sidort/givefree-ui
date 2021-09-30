@@ -3,6 +3,7 @@ import {
   navGive,
   waitStandard
 } from "../support/variables/general";
+
 import {
   buttonSignup,
   emailInput,

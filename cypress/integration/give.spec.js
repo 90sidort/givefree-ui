@@ -1,8 +1,5 @@
 import {
-  searchItemsInput,
   waitStandard,
-  dropdownItem,
-  searchItemImage,
   navGive,
   navTake,
   errorDisplay,
@@ -33,13 +30,13 @@ import {
   updateItemBttn,
   deleteItemButton,
   confirmBttn,
-  giveItemButton,
   possibleTakersH3,
   noTakerPar,
   closeWisherBttn,
   acceptUserOffer,
   givenToPar
 } from "../support/variables/item";
+
 import { validUsername, validPassword } from "../support/variables/sign";
 
 describe("Tests for give item functionalities", () => {

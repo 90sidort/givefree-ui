@@ -1,8 +1,5 @@
 import {
-  searchItemsInput,
   waitStandard,
-  dropdownItem,
-  searchItemImage,
   prevPageButton,
   nextPageButton,
   navGive,
@@ -30,6 +27,7 @@ import {
   emailParagraph,
   addToWishlistReq
 } from "../support/variables/item";
+
 import { validUsername, validPassword } from "../support/variables/sign";
 
 describe("Tests for take item functionalities", () => {
