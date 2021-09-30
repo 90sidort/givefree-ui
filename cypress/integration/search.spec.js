@@ -82,4 +82,20 @@ describe("Tests for search functionalities", () => {
       .should("be.visible")
       .should("have.text", `No results for ${validUsername}`);
   });
+  it("Should not show given and draft items", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).should("be.visible");
+    cy.visit("/");
+    cy.get(searchItemsInput, { timeout: waitStandard }).type("discrete");
+    cy.get(dropdownItem, { timeout: waitStandard })
+      .should("be.visible")
+      .should("have.text", `No results for discrete`);
+    cy.get(searchItemsInput, { timeout: waitStandard }).clear();
+    cy.get(searchItemsInput, { timeout: waitStandard }).type(
+      "Super duper jacket"
+    );
+    cy.get(dropdownItem, { timeout: waitStandard })
+      .should("be.visible")
+      .should("have.text", `No results for Super duper jacket`);
+  });
 });

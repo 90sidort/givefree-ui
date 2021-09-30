@@ -2,6 +2,7 @@ import {
   waitStandard,
   navTake,
   navGiving,
+  navGive,
   modalElement,
   navGiven,
   sectionWishlist,
@@ -24,7 +25,9 @@ import {
   acceptUserOffer,
   givenToPar,
   wishlistItemTitle,
-  addItemReq
+  addItemReq,
+  addToWishlistBttn,
+  giveItemButton
 } from "../support/variables/item";
 
 import {
@@ -172,5 +175,31 @@ describe("Tests for search the rest of item functionalities", () => {
       .click();
     cy.url().should("include", "/giving/1");
     cy.checkPageBttn("true", "false");
+  });
+  it("Should display items with options (giving)", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).should("be.visible");
+    cy.get(navGiving, { timeout: waitStandard }).click();
+    cy.url().should("include", "/giving");
+    cy.get(editItemButton, { timeout: waitStandard })
+      .should("be.visible")
+      .should("have.length", 16);
+    cy.get(giveItemButton, { timeout: waitStandard })
+      .should("be.visible")
+      .should("have.length", 16);
+    cy.get(deleteItemButton, { timeout: waitStandard })
+      .should("be.visible")
+      .should("have.length", 16);
+  });
+  it("Should be able to access item details (giving)", () => {
+    cy.loginNoUI(validUsername, validPassword);
+    cy.get(navGive, { timeout: waitStandard }).should("be.visible");
+    cy.get(navGiving, { timeout: waitStandard }).click();
+    cy.url().should("include", "/giving");
+    cy.get(itemLink, { timeout: waitStandard })
+      .eq(0)
+      .click();
+    cy.get(itemDetailsName, { timeout: waitStandard }).should("be.visible");
+    cy.get(addToWishlistBttn, { timeout: waitStandard }).should("not.exist");
   });
 });

@@ -214,7 +214,7 @@ describe("Tests for take item functionalities", () => {
     cy.wait("@request").then(interception => {
       expect(interception.response.body.data.addToWishlist).to.eq(true);
     });
-    cy.get(wishlistCounter, { timeout: waitStandard }).should("have.text", "8");
+    cy.get(wishlistCounter, { timeout: waitStandard }).should("have.text", "9");
     cy.get(sectionWishlist, { timeout: waitStandard }).click();
     cy.get(wishlistItemTitle("customer loyalty"), {
       timeout: waitStandard
