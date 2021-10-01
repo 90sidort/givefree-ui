@@ -2,6 +2,7 @@ export const navTake = 'button[data-test="sectionTake"]';
 export const navGive = 'button[data-test="sectionGive"]';
 export const navGiving = 'button[data-test="sectionGiving"]';
 export const navGiven = 'button[data-test="sectionGiven"]';
+export const navAccount = 'button[data-test="sectionAccount"]';
 export const sectionTaken = 'button[data-test="sectionTaken"]';
 export const errorDisplay = 'p[data-test="graphql-error"]';
 export const waitStandard = 30000;

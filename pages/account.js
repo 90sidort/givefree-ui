@@ -9,16 +9,16 @@ export default function Account() {
   const userData = useUser();
   if (userData?.me) {
     const {
-      me: { id, username, email, name, surname, about, active },
+      me: { id, username, email, name, surname, about, active }
     } = userData;
     body = (
       <div>
-        <p>Username: {username}</p>
-        <p>Email: {email}</p>
-        <p>First name: {name}</p>
-        <p>Last name: {surname}</p>
-        {!active && <p>DEACTIVATED ACCOUNT</p>}
-        {about && <p>About: {about}</p>}
+        <p data-test="usernamPar">Username: {username}</p>
+        <p data-test="emailPar">Email: {email}</p>
+        <p data-test="firstNamePar">First name: {name}</p>
+        <p data-test="lastNamePar">Last name: {surname}</p>
+        {!active && <p data-test="deactivPar">DEACTIVATED ACCOUNT</p>}
+        {about && <p data-test="aboutPar">About: {about}</p>}
       </div>
     );
   } else body = <p>Loading...</p>;
@@ -26,7 +26,7 @@ export default function Account() {
     return (
       <div>
         {body}
-        <button type="button" onClick={changeView}>
+        <button type="button" onClick={changeView} data-test="accountEditBttn">
           Edit
         </button>
       </div>
@@ -35,7 +35,11 @@ export default function Account() {
     return (
       <div>
         <UpdateUser data={userData?.me} setView={setShowDetails} />
-        <button type="button" onClick={changeView}>
+        <button
+          type="button"
+          onClick={changeView}
+          data-test="accountCancelBttn"
+        >
           Cancel
         </button>
       </div>
