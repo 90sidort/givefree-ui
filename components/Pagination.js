@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import { perPage } from "../config";
 
 import { COUNT_ITEMS } from "../graphql/items";
@@ -14,7 +14,7 @@ export default function Pagination({ page, takerId, view }) {
   const [showModal, setShowModal] = useState(false);
   const { data, error, loading } = useQuery(COUNT_ITEMS, {
     variables: { input: { takerId, view } },
-    onError: () => setShowModal(true)
+    onError: () => setShowModal(true),
   });
   const links = findLink(page, view);
   const pageCount = Math.ceil(data?.countItems / perPage);
@@ -23,20 +23,22 @@ export default function Pagination({ page, takerId, view }) {
       {loading && <Load />}
       <PaginationStyles>
         <Head>
-          <title>GiveFree! - Page {page}</title>
+          <title>
+            GiveFree! - Page
+            {page}
+          </title>
         </Head>
         <Link href={links.prev}>
           <a aria-disabled={page <= 1} data-test="prevPage">{`< Prev`}</a>
         </Link>
         <p>
-          Page {page} of {`${pageCount}`}
+          Page {page} of {pageCount}
         </p>
         <p>{`${data?.countItems} items total`}</p>
         <Link href={links.next}>
-          <a
-            aria-disabled={page >= pageCount}
-            data-test="nextPage"
-          >{`Next >`}</a>
+          <a aria-disabled={page >= pageCount} data-test="nextPage">
+            {`Next >`}
+          </a>
         </Link>
       </PaginationStyles>
       <Modal

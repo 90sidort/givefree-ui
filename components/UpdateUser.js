@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
-import Router from "next/router";
-import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import React, { useState } from "react";
 
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
@@ -10,36 +9,36 @@ import { UPDATE_USER, ME } from "../graphql/user";
 export default function UpdateUser({ data, setView }) {
   const [showError, setShowError] = useState(false);
   const { id, name, surname, about } = data;
-  const searchId = parseInt(id);
+  const searchId = parseInt(id, 10);
   const { inputs, changeHandler } = useForm({
     id: searchId,
     name,
     surname,
     about,
-    newEmail: ""
+    newEmail: "",
   });
   const [
     updateUser,
-    { data: updateData, loading: updateLoading, error: updateError }
+    { data: updateData, loading: updateLoading, error: updateError },
   ] = useMutation(UPDATE_USER, {
     variables: {
       id: inputs.id,
       name: inputs.name,
       surname: inputs.surname,
       about: inputs.about,
-      newEmail: inputs.newEmail
+      newEmail: inputs.newEmail,
     },
     refetchQueries: [{ query: ME }],
     onError: () => setShowError(true),
     onCompleted: () => {
       setShowError(false);
       setView(true);
-    }
+    },
   });
   if (updateLoading) return <p>Loading...</p>;
   return (
     <FormStyles
-      onSubmit={async e => {
+      onSubmit={async (e) => {
         e.preventDefault();
         await updateUser();
       }}

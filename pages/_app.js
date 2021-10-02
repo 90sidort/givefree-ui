@@ -1,10 +1,11 @@
+import React from "react";
 import ProptTypes from "prop-types";
 import NProgress from "nprogress";
 import Router from "next/router";
 
 import "../components/styles/nprogress.css";
-import Layout from "../components/Layout";
 import { ApolloProvider } from "@apollo/client";
+import Layout from "../components/Layout";
 import withData from "../lib/withData";
 import { WishlistStateProvider } from "../lib/WishlistState";
 

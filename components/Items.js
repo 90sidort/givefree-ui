@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { perPage } from "../config";
 import { GET_GIVEN, GET_GIVING, GET_ITEMS, GET_TAKEN } from "../graphql/items";
@@ -36,12 +36,12 @@ export default function Items({ page, view }) {
         skip: page * perPage - perPage,
         first: perPage,
         userId: userData?.me?.id,
-        view
-      }
+        view,
+      },
     },
     onError: () => {
       setShowModal(true);
-    }
+    },
   });
   return (
     <div>

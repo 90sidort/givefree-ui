@@ -1,13 +1,13 @@
 import Router from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 
 import { ME, SIGN_OUT } from "../graphql/user";
 import Modal from "./Modal";
 
-export default function Signout({ children }) {
+export default function Signout() {
   const [showModal, setShowModal] = useState(false);
-  const [signout, { data, error }] = useMutation(SIGN_OUT, {
+  const [signout, { error }] = useMutation(SIGN_OUT, {
     refetchQueries: [{ query: ME }],
     onError: () => setShowModal(true),
   });

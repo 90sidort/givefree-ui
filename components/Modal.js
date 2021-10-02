@@ -4,7 +4,7 @@ import {
   StyledModal,
   StyledModalHeader,
   StyledModalOverlay,
-  StyledModalBody
+  StyledModalBody,
 } from "./styles/ModalStyles";
 
 function Modal({ show, onClose, children, title, onConfirm, confirm }) {
@@ -14,11 +14,11 @@ function Modal({ show, onClose, children, title, onConfirm, confirm }) {
     setIsBrowser(true);
   }, []);
 
-  const handleCloseClick = e => {
+  const handleCloseClick = (e) => {
     e.preventDefault();
     onClose();
   };
-  const handleConfirmClick = e => {
+  const handleConfirmClick = (e) => {
     e.preventDefault();
     onConfirm();
     onClose();
@@ -52,9 +52,8 @@ function Modal({ show, onClose, children, title, onConfirm, confirm }) {
       modalContent,
       document.getElementById("modal-root")
     );
-  } else {
-    return null;
   }
+  return null;
 }
 
 export default Modal;

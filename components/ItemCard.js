@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { useWishlist } from "../lib/WishlistState";
 
@@ -15,9 +16,9 @@ export default function ItemCard({ item, userid }) {
     category,
     description,
     status,
-    giver: { id: giverId }
+    giver: { id: giverId },
   } = item;
-  const { openWisherlist, wishlistCount } = useWishlist();
+  const { openWisherlist } = useWishlist();
   return (
     <ItemStyles data-test="itemCard">
       {images?.length > 0 ? (
@@ -26,7 +27,7 @@ export default function ItemCard({ item, userid }) {
         })
       ) : (
         <img
-          src={"http://localhost:4000/placeholder.jpg"}
+          src="http://localhost:4000/placeholder.jpg"
           alt="placeholder"
           data-test="imagePlaceholder"
         />
@@ -47,7 +48,7 @@ export default function ItemCard({ item, userid }) {
       {status !== "GIVEN" && (
         <div className="buttonList">
           {giverId === userid && (
-            <Link href={{ pathname: "/update", query: { id: id } }}>
+            <Link href={{ pathname: "/update", query: { id } }}>
               <a data-test="editItemButton">Edit</a>
             </Link>
           )}

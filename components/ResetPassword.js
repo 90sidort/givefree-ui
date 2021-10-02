@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
 
@@ -11,14 +12,11 @@ export default function ResetPassword({ token }) {
     email: "",
     password: "",
     retype: "",
-    token: token,
+    token,
   });
-  const [resetsPassword, { data, loading, error }] = useMutation(
-    RESET_PASSWORD,
-    {
-      variables: { ...inputs },
-    }
-  );
+  const [resetsPassword, { loading, error }] = useMutation(RESET_PASSWORD, {
+    variables: { ...inputs },
+  });
   async function handleSubmit(e) {
     e.preventDefault();
     try {

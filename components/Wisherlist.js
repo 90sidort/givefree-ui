@@ -1,8 +1,8 @@
+import React from "react";
 import { useQuery } from "@apollo/client";
 
 import { GET_WISHERS } from "../graphql/wishlist";
 import { WishlistItemStyles, WishlistStyles } from "./styles/WishlistStyles";
-import { useUser } from "./User";
 import DisplayError from "./ErrorMessage";
 import Supreme from "./styles/Supreme";
 import CloseButtonStyles from "./styles/CloseButtonStyles";
@@ -21,14 +21,10 @@ function WisherItem({ wisher, itemId, i }) {
 }
 
 export default function Wisherlist() {
-  const {
-    wisherlistOpen,
-    closeWisherlist,
-    setWisherlistCount,
-    currentItem
-  } = useWishlist();
+  const { wisherlistOpen, closeWisherlist, setWisherlistCount, currentItem } =
+    useWishlist();
   const { data, loading, error } = useQuery(GET_WISHERS, {
-    variables: { itemId: currentItem }
+    variables: { itemId: currentItem },
   });
   if (!data) return null;
   if (data?.getWishers?.length > 0)

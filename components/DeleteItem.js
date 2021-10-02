@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { DELETE_ITEM } from "../graphql/items";
 import Modal from "./Modal";
@@ -10,10 +10,10 @@ function update(cache, payload) {
 
 export default function DeleteItem({ id, children }) {
   const [showModal, setShowModal] = useState(false);
-  const numId = parseInt(id);
+  const numId = parseInt(id, 10);
   const [deleteItem, { loading }] = useMutation(DELETE_ITEM, {
     variables: { id: numId },
-    update: update
+    update,
   });
   return (
     <>
@@ -30,7 +30,7 @@ export default function DeleteItem({ id, children }) {
         title="Are you sure?"
         confirm="Delete"
         onClose={() => setShowModal(false)}
-        onConfirm={() => deleteItem().catch(err => alert(err.message))}
+        onConfirm={() => deleteItem().catch((err) => console.log(err))}
       >
         Item will be irreversibly deleted!
       </Modal>

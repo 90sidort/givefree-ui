@@ -1,12 +1,14 @@
+import React from "react";
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
+
 import { ME, SIGN_UP } from "../graphql/user";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 import Load from "./Load";
 import FormStyles from "./styles/Form";
 
-export default function Signup({ query, changeForm }) {
+export default function Signup({ changeForm }) {
   const { inputs, resetInitial, changeHandler } = useForm({
     username: "",
     password: "",
@@ -16,7 +18,7 @@ export default function Signup({ query, changeForm }) {
     email: "",
     about: "",
   });
-  const [signup, { data, loading, error }] = useMutation(SIGN_UP, {
+  const [signup, { loading, error }] = useMutation(SIGN_UP, {
     variables: { ...inputs },
     refetchQueries: [{ query: ME }],
     onError: () => true,

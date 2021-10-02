@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@apollo/client";
 import Head from "next/head";
 
@@ -12,15 +13,15 @@ export default function SingleItem({ id }) {
   const user = useUser();
   let item;
   let alreadyWished = false;
-  const searchId = parseInt(id);
+  const searchId = parseInt(id, 10);
   const { data, loading, error } = useQuery(GET_ITEM, {
     variables: { id: searchId },
-    onError: () => true
+    onError: () => true,
   });
   if (data) {
     const { getItem } = data;
     item = getItem;
-    item.wishers.forEach(wisher => {
+    item.wishers.forEach((wisher) => {
       if (wisher.id === user?.me?.id) alreadyWished = true;
     });
   }
@@ -31,7 +32,7 @@ export default function SingleItem({ id }) {
       {data && (
         <SingleItemStyles>
           <Head>
-            <title>Give Free! | {item.name ? item.name : "Item details"}</title>
+            <title>Give Free! |{item.name ? item.name : "Item details"}</title>
           </Head>
           {item &&
             item.images.length > 0 &&

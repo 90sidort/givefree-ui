@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
 
@@ -7,7 +8,7 @@ import DisplayError from "./ErrorMessage";
 import Load from "./Load";
 import FormStyles from "./styles/Form";
 
-export default function ResetRequest({ query, changeForm }) {
+export default function ResetRequest({ changeForm }) {
   const { inputs, resetInitial, changeHandler } = useForm({
     email: "",
   });

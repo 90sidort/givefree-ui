@@ -1,30 +1,31 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import React, { useState } from "react";
+
 import { GET_ITEM } from "../graphql/items";
 import {
   ADD_ITEM_TO_WISHLIST,
   GET_WISHERS,
-  GET_WISHLIST
+  GET_WISHLIST,
 } from "../graphql/wishlist";
 import Modal from "./Modal";
 import { useUser } from "./User";
 
 export default function AddToWishlist({ id }) {
   const [showModal, setShowModal] = useState(false);
-  const intId = parseInt(id);
+  const intId = parseInt(id, 10);
   const userData = useUser();
-  const [addToWishlist, { data, error, loading }] = useMutation(
+  const [addToWishlist, { error, loading }] = useMutation(
     ADD_ITEM_TO_WISHLIST,
     {
       variables: { itemId: intId },
       refetchQueries: [
         { query: GET_WISHLIST, variables: { userId: userData?.me?.id } },
         { query: GET_WISHERS, variables: { itemId: intId } },
-        { query: GET_ITEM, variables: { id: intId } }
+        { query: GET_ITEM, variables: { id: intId } },
       ],
-      onError: error => {
+      onError: () => {
         setShowModal(true);
-      }
+      },
     }
   );
   return (
@@ -35,7 +36,9 @@ export default function AddToWishlist({ id }) {
         onClick={addToWishlist}
         data-test="addToWishlistBttn"
       >
-        + Add{loading && "ing"} to wishlist
+        + Add
+        {loading && "ing "}
+        to wishlist
       </button>
       <Modal
         show={showModal}

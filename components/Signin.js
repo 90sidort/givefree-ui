@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
 
@@ -7,12 +8,12 @@ import DisplayError from "./ErrorMessage";
 import Load from "./Load";
 import FormStyles from "./styles/Form";
 
-export default function SigninComponent({ query, changeForm }) {
+export default function SigninComponent({ changeForm }) {
   const { inputs, resetInitial, changeHandler } = useForm({
     username: "",
     password: "",
   });
-  const [signin, { data, loading, error }] = useMutation(SIGN_IN, {
+  const [signin, { loading, error }] = useMutation(SIGN_IN, {
     variables: { ...inputs },
     refetchQueries: [{ query: ME }],
     onError: () => true,

@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import Router from "next/router";
 
@@ -12,17 +13,18 @@ export default function UpdateItem({ id }) {
   const optionsState = createOptions(stateOptions);
   const optionsCategory = createOptions(categoryOptions);
   const optionsStatus = createOptions(statusOptions);
-  const searchId = parseInt(id);
-  const { data: getData, loading: getLoading, error: getError } = useQuery(
-    GET_ITEM,
-    {
-      variables: { id: searchId }
-    }
-  );
+  const searchId = parseInt(id, 10);
+  const {
+    data: getData,
+    loading: getLoading,
+    error: getError,
+  } = useQuery(GET_ITEM, {
+    variables: { id: searchId },
+  });
   const { inputs, changeHandler } = useForm(getData?.getItem);
   const [
     updateItem,
-    { data: updateData, loading: updateLoading, error: updateError }
+    { data: updateData, loading: updateLoading, error: updateError },
   ] = useMutation(UPDATE_ITEM, {
     variables: {
       id: searchId,
@@ -31,19 +33,19 @@ export default function UpdateItem({ id }) {
         state: inputs.state,
         status: inputs.status,
         category: inputs.category,
-        description: inputs.description
-      }
+        description: inputs.description,
+      },
     },
-    refetchQueries: [{ query: GET_ITEM, variables: { id: searchId } }]
+    refetchQueries: [{ query: GET_ITEM, variables: { id: searchId } }],
   });
   if (getLoading) return <p>Loading...</p>;
   return (
     <FormStyles
-      onSubmit={async e => {
+      onSubmit={async (e) => {
         e.preventDefault();
         await updateItem();
         Router.push({
-          pathname: `/item/${id}`
+          pathname: `/item/${id}`,
         });
       }}
     >

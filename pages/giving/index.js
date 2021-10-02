@@ -1,3 +1,4 @@
+import React from "react";
 import { useRouter } from "next/dist/client/router";
 
 import Items from "../../components/Items";
@@ -9,7 +10,7 @@ export default function Giving() {
   const {
     query: { page },
   } = useRouter();
-  const currentPage = page ? parseInt(page) : 1;
+  const currentPage = page ? parseInt(page, 10) : 1;
   const takerId = userData?.me?.id;
   const view = "giving";
   return (

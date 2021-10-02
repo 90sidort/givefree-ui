@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
 
@@ -14,14 +15,14 @@ function WishlistItem({ item, i }) {
   return (
     <WishlistItemStyles key={i}>
       {item.images.length > 0 ? (
-        item.images.map((image, i) => {
-          return <img key={i} src={image.url} alt={image.alt} width="100" />;
+        item.images.map((image, id) => {
+          return <img key={id} src={image.url} alt={image.alt} width="100" />;
         })
       ) : (
         <img
           width="100"
-          src={"http://localhost:4000/placeholder.jpg"}
-          alt={"placeholder"}
+          src="http://localhost:4000/placeholder.jpg"
+          alt="placeholder"
         />
       )}
       <div>
@@ -41,7 +42,7 @@ export default function Wishlist() {
   const { wishlistOpen, closeWishlist, setWishlistCount } = useWishlist();
   const { data, loading, error } = useQuery(GET_WISHLIST, {
     variables: { userId: me?.me?.id },
-    skip: me?.me?.id === undefined
+    skip: me?.me?.id === undefined,
   });
   if (!me || !data) return null;
   if (data?.getWishlist?.length > 0)
@@ -51,7 +52,10 @@ export default function Wishlist() {
       <DisplayError error={error} />
       {loading && <p>Loading...</p>}
       <header>
-        <Supreme>{me?.me?.username}'s wishlist</Supreme>
+        <Supreme>
+          {me?.me?.username}
+          's wishlist
+        </Supreme>
         <CloseButtonStyles onClick={closeWishlist} data-test="closeWishBttn">
           &times;
         </CloseButtonStyles>
