@@ -118,6 +118,6 @@ describe("Tests for give account view", () => {
       .should("include", "Changed");
     cy.get(aboutPar, { timeout: waitStandard })
       .invoke("text")
-      .should("include", " Changed description");
+      .should("include", "Changed description");
   });
 });

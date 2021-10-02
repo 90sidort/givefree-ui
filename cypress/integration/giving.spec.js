@@ -64,7 +64,9 @@ describe("Tests for search the rest of item functionalities", () => {
           cy.get(wishlistItemTitle("radical"), {
             timeout: waitStandard,
           }).should("not.exist");
-          cy.get(sectionTaken, { timeout: waitStandard }).click();
+          cy.get(sectionTaken, { timeout: waitStandard }).click({
+            force: true,
+          });
           cy.url().should("include", "/taken");
           cy.get(itemLink, { timeout: waitStandard })
             .eq(0)
