@@ -1,7 +1,7 @@
 import {
   errorDisplay,
   navGive,
-  waitStandard
+  waitStandard,
 } from "../support/variables/general";
 
 import {
@@ -30,7 +30,7 @@ import {
   surnameInput,
   usernameInput,
   validPassword,
-  validUsername
+  validUsername,
 } from "../support/variables/sign";
 
 describe("Test for signin/ signup functionalities", () => {

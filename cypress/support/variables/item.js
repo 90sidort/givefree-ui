@@ -9,7 +9,7 @@ export const giveItemButton = 'button[data-test="giveItemButton"]';
 export const deleteItemButton = 'button[data-test="deleteItemButton"]';
 export const wishlistCounter = 'div[data-test="wishlistCount"]';
 export const removeFormWishlist = 'button[data-test="removeFormWishlist"]';
-export const wishlistItemTitle = name => `h3[data-test="itemTitle_${name}"]`;
+export const wishlistItemTitle = (name) => `h3[data-test="itemTitle_${name}"]`;
 export const closeWisherBttn = 'button[data-test="closeWisherBttn"]';
 export const closeWishBttn = 'button[data-test="closeWishBttn"]';
 export const emailParagraph = 'p[data-test="emailParagraph"]';
@@ -35,13 +35,13 @@ export const noTakerPar = 'p[data-test="noTakers"]';
 export const acceptUserOffer = 'button[data-test="acceptUserOffer"]';
 export const givenToPar = 'p[data-test="givenToPar"]';
 
-export const addToWishlistReq = idItem => ({
+export const addToWishlistReq = (idItem) => ({
   operationName: "ADD_ITEM_TO_WISHLIST",
   variables: {
-    itemId: idItem
+    itemId: idItem,
   },
   query:
-    "mutation ADD_ITEM_TO_WISHLIST($itemId: Int!) {\n  addToWishlist(itemId: $itemId)\n}\n"
+    "mutation ADD_ITEM_TO_WISHLIST($itemId: Int!) {\n  addToWishlist(itemId: $itemId)\n}\n",
 });
 export const addItemReq = {
   operationName: "ADD_ITEM",
@@ -52,19 +52,19 @@ export const addItemReq = {
       category: "OTHER",
       status: "ONGOING",
       giverId: 11123,
-      description: ""
+      description: "",
     },
-    file: ""
+    file: "",
   },
   query:
-    "mutation ADD_ITEM($item: ItemInput!, $file: FileUpload) {\n  addItem(item: $item, file: $file) {\n    name\n    id\n    description\n    category\n    images {\n      url\n      alt\n      __typename\n    }\n    __typename\n  }\n}\n"
+    "mutation ADD_ITEM($item: ItemInput!, $file: FileUpload) {\n  addItem(item: $item, file: $file) {\n    name\n    id\n    description\n    category\n    images {\n      url\n      alt\n      __typename\n    }\n    __typename\n  }\n}\n",
 };
 export const giveItemReq = {
   operationName: "GIVE_ITEM",
   variables: {
     userId: 11123,
-    itemId: 11195
+    itemId: 11195,
   },
   query:
-    "mutation GIVE_ITEM($userId: Int!, $itemId: Int!) {\n  giveItem(userId: $userId, itemId: $itemId) {\n    id\n    __typename\n  }\n}\n"
+    "mutation GIVE_ITEM($userId: Int!, $itemId: Int!) {\n  giveItem(userId: $userId, itemId: $itemId) {\n    id\n    __typename\n  }\n}\n",
 };

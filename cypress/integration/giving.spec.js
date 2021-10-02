@@ -8,7 +8,7 @@ import {
   sectionWishlist,
   sectionTaken,
   nextPageButton,
-  prevPageButton
+  prevPageButton,
 } from "../support/variables/general";
 
 import {
@@ -27,14 +27,14 @@ import {
   wishlistItemTitle,
   addItemReq,
   addToWishlistBttn,
-  giveItemButton
+  giveItemButton,
 } from "../support/variables/item";
 
 import {
   validUsername,
   validPassword,
   signoutReq,
-  itemOwner
+  itemOwner,
 } from "../support/variables/sign";
 
 describe("Tests for search the rest of item functionalities", () => {
@@ -44,25 +44,25 @@ describe("Tests for search the rest of item functionalities", () => {
     });
   });
   it("Should remove from wishlist and move it to taken when user recives item", () => {
-    cy.loginNoUI(itemOwner, validPassword).then(res => {
+    cy.loginNoUI(itemOwner, validPassword).then((res) => {
       const token = res.document.cookie.split("token=")[1];
       cy.request({
         method: "POST",
         url: "http://localhost:4000/graphql",
         body: { ...giveItemReq },
-        headers: { token }
+        headers: { token },
       }).then(() => {
         cy.request({
           method: "POST",
           url: "http://localhost:4000/graphql",
           body: { ...signoutReq },
-          headers: { token }
+          headers: { token },
         }).then(() => {
           cy.loginNoUI(validUsername, validPassword);
           cy.get(navGiving, { timeout: waitStandard }).click();
           cy.get(sectionWishlist, { timeout: waitStandard }).click();
           cy.get(wishlistItemTitle("radical"), {
-            timeout: waitStandard
+            timeout: waitStandard,
           }).should("not.exist");
           cy.get(sectionTaken, { timeout: waitStandard }).click();
           cy.url().should("include", "/taken");
@@ -75,20 +75,18 @@ describe("Tests for search the rest of item functionalities", () => {
     });
   });
   it("Should be able to edit item (giving section)", () => {
-    cy.loginNoUI(validUsername, validPassword).then(res => {
+    cy.loginNoUI(validUsername, validPassword).then((res) => {
       const token = res.document.cookie.split("token=")[1];
       cy.request({
         method: "POST",
         url: "http://localhost:4000/graphql",
         body: { ...addItemReq },
-        headers: { token }
+        headers: { token },
       }).then(() => {
         cy.visit("/give");
         cy.get(navGiving, { timeout: waitStandard }).click();
         cy.url().should("include", `/giving`);
-        cy.get(editItemButton, { timeout: waitStandard })
-          .eq(0)
-          .click();
+        cy.get(editItemButton, { timeout: waitStandard }).eq(0).click();
         cy.get(itemNameInput, { timeout: waitStandard }).type("changed");
         cy.get(updateItemBttn, { timeout: waitStandard }).click();
         cy.get(itemDetailsName, { timeout: waitStandard })
@@ -105,13 +103,13 @@ describe("Tests for search the rest of item functionalities", () => {
   it("Should be able to delete created item (giving section)", () => {
     const itemTBDeleted = { ...addItemReq };
     itemTBDeleted.variables.item.name = "toBeDeleted";
-    cy.loginNoUI(validUsername, validPassword).then(res => {
+    cy.loginNoUI(validUsername, validPassword).then((res) => {
       const token = res.document.cookie.split("token=")[1];
       cy.request({
         method: "POST",
         url: "http://localhost:4000/graphql",
         body: { ...addItemReq },
-        headers: { token }
+        headers: { token },
       }).then(() => {
         cy.visit("/give");
         cy.get(navGiving, { timeout: waitStandard }).click();
@@ -120,9 +118,7 @@ describe("Tests for search the rest of item functionalities", () => {
           .eq(0)
           .invoke("text")
           .should("include", "toBeDeleted");
-        cy.get(deleteItemButton, { timeout: waitStandard })
-          .eq(0)
-          .click();
+        cy.get(deleteItemButton, { timeout: waitStandard }).eq(0).click();
         cy.get(modalElement, { timeout: waitStandard }).should("be.visible");
         cy.get(confirmBttn, { timeout: waitStandard }).click();
         cy.get(modalElement, { timeout: waitStandard }).should("not.exist");
@@ -140,9 +136,7 @@ describe("Tests for search the rest of item functionalities", () => {
     cy.get('button[id="11220"]', { timeout: waitStandard }).click();
     cy.get(possibleTakersH3, { timeout: waitStandard }).should("be.visible");
     cy.get(acceptUserOffer, { timeout: waitStandard }).should("have.length", 5);
-    cy.get(acceptUserOffer, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(acceptUserOffer, { timeout: waitStandard }).eq(0).click();
     cy.get(closeWisherBttn, { timeout: waitStandard }).click();
     cy.get('button[id="11220"]', { timeout: waitStandard }).should("not.exist");
     cy.get(navGiven).click();
@@ -151,9 +145,7 @@ describe("Tests for search the rest of item functionalities", () => {
       .eq(0)
       .invoke("text")
       .should("include", "Super extra shorts two!");
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(0).click();
     cy.get(givenToPar, { timeout: waitStandard })
       .eq(0)
       .invoke("text")
@@ -165,14 +157,10 @@ describe("Tests for search the rest of item functionalities", () => {
     cy.get(navGiving, { timeout: waitStandard }).click();
     cy.url().should("include", "/giving");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/giving/2");
     cy.checkPageBttn("false", "true");
-    cy.get(prevPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(prevPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/giving/1");
     cy.checkPageBttn("true", "false");
   });
@@ -196,9 +184,7 @@ describe("Tests for search the rest of item functionalities", () => {
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.get(navGiving, { timeout: waitStandard }).click();
     cy.url().should("include", "/giving");
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(0).click();
     cy.get(itemDetailsName, { timeout: waitStandard }).should("be.visible");
     cy.get(addToWishlistBttn, { timeout: waitStandard }).should("not.exist");
   });

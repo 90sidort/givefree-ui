@@ -3,7 +3,7 @@ import {
   waitStandard,
   dropdownItem,
   searchItemImage,
-  navGive
+  navGive,
 } from "../support/variables/general";
 
 import { itemDetailsName } from "../support/variables/item";
@@ -23,9 +23,7 @@ describe("Tests for search functionalities", () => {
       .should("be.visible")
       .should("not.have.text", "Needs at least three characters");
     cy.get(searchItemImage, { timeout: waitStandard }).should("have.length", 2);
-    cy.get(searchItemImage, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(searchItemImage, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/item");
     cy.get(itemDetailsName, { timeout: waitStandard })
       .should("be.visible")
@@ -55,9 +53,7 @@ describe("Tests for search functionalities", () => {
       .should("be.visible")
       .should("not.have.text", "Needs at least three characters");
     cy.get(searchItemImage, { timeout: waitStandard }).should("have.length", 2);
-    cy.get(searchItemImage, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(searchItemImage, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/item");
     cy.get(itemDetailsName, { timeout: waitStandard })
       .should("be.visible")

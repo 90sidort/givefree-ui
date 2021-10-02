@@ -7,7 +7,7 @@ import {
   modalElement,
   closeModal,
   modalContent,
-  navTake
+  navTake,
 } from "../support/variables/general";
 
 import {
@@ -25,7 +25,7 @@ import {
   removeFormWishlist,
   closeWishBttn,
   emailParagraph,
-  addToWishlistReq
+  addToWishlistReq,
 } from "../support/variables/item";
 
 import { validUsername, validPassword } from "../support/variables/sign";
@@ -48,13 +48,8 @@ describe("Tests for take item functionalities", () => {
       .eq(3)
       .invoke("text")
       .should("include", "COAT");
-    cy.get(itemLink)
-      .eq(3)
-      .invoke("text")
-      .should("include", "Programmable");
-    cy.get(itemLink)
-      .eq(3)
-      .click();
+    cy.get(itemLink).eq(3).invoke("text").should("include", "Programmable");
+    cy.get(itemLink).eq(3).click();
     cy.url().should("include", "/item/11189");
     cy.get(itemDetailsName, { timeout: waitStandard })
       .should("be.visible")
@@ -64,32 +59,18 @@ describe("Tests for take item functionalities", () => {
   it("Should be able to change pages back and forth (without signin)", () => {
     cy.visit("/");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/2");
     cy.checkPageBttn("false", "false");
-    cy.get(prevPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(prevPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/1");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/2");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/6");
     cy.checkPageBttn("false", "true");
   });
@@ -109,13 +90,8 @@ describe("Tests for take item functionalities", () => {
     cy.get(deleteItemButton, { timeout: waitStandard })
       .should("be.visible")
       .should("have.length", 5);
-    cy.get(itemLink)
-      .eq(3)
-      .invoke("text")
-      .should("include", "Programmable");
-    cy.get(itemLink)
-      .eq(3)
-      .click();
+    cy.get(itemLink).eq(3).invoke("text").should("include", "Programmable");
+    cy.get(itemLink).eq(3).click();
     cy.url().should("include", "/item/11189");
     cy.get(itemDetailsName, { timeout: waitStandard })
       .should("be.visible")
@@ -127,32 +103,18 @@ describe("Tests for take item functionalities", () => {
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/2");
     cy.checkPageBttn("false", "false");
-    cy.get(prevPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(prevPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/1");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/2");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/items/6");
     cy.checkPageBttn("false", "true");
   });
@@ -160,18 +122,14 @@ describe("Tests for take item functionalities", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/");
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(0).click();
     cy.get(itemDetailsName, { timeout: waitStandard })
       .invoke("text")
       .should("include", "customer loyalty");
     cy.get(addToWishlistBttn, { timeout: waitStandard }).should("be.visible");
     cy.get(emailParagraph, { timeout: waitStandard }).should("not.exist");
     cy.get(navTake, { timeout: waitStandard }).click();
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(1)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(1).click();
     cy.get(addToWishlistBttn, { timeout: waitStandard }).should("not.exist");
     cy.get(emailParagraph, { timeout: waitStandard }).should("be.visible");
   });
@@ -179,9 +137,7 @@ describe("Tests for take item functionalities", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/");
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(2)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(2).click();
     cy.get(itemDetailsName, { timeout: waitStandard })
       .invoke("text")
       .should("include", "adapter");
@@ -208,16 +164,14 @@ describe("Tests for take item functionalities", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/");
-    cy.get(addToWishlistBttn, { timeout: waitStandard })
-      .eq(0)
-      .click();
-    cy.wait("@request").then(interception => {
+    cy.get(addToWishlistBttn, { timeout: waitStandard }).eq(0).click();
+    cy.wait("@request").then((interception) => {
       expect(interception.response.body.data.addToWishlist).to.eq(true);
     });
     cy.get(wishlistCounter, { timeout: waitStandard }).should("have.text", "9");
     cy.get(sectionWishlist, { timeout: waitStandard }).click();
     cy.get(wishlistItemTitle("customer loyalty"), {
-      timeout: waitStandard
+      timeout: waitStandard,
     }).should("exist");
   });
   it("Should not be able to add the same item again to wishlist", () => {
@@ -225,9 +179,7 @@ describe("Tests for take item functionalities", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/");
-    cy.get(addToWishlistBttn, { timeout: waitStandard })
-      .eq(1)
-      .click();
+    cy.get(addToWishlistBttn, { timeout: waitStandard }).eq(1).click();
     cy.get(modalContent, { timeout: waitStandard })
       .scrollIntoView()
       .should("be.visible")
@@ -239,19 +191,17 @@ describe("Tests for take item functionalities", () => {
   it("Should be able to remove item from wishlist", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
-    cy.get(wishlistCounter, { timeout: waitStandard }).then(countOne => {
+    cy.get(wishlistCounter, { timeout: waitStandard }).then((countOne) => {
       const originalCount = countOne[0].innerText;
       cy.get(sectionWishlist, { timeout: waitStandard }).click();
       cy.get(wishlistItemTitle("discrete"), { timeout: waitStandard }).should(
         "exist"
       );
-      cy.get(removeFormWishlist, { timeout: waitStandard })
-        .eq(0)
-        .click();
+      cy.get(removeFormWishlist, { timeout: waitStandard }).eq(0).click();
       cy.get(wishlistItemTitle("discrete"), { timeout: waitStandard }).should(
         "not.exist"
       );
-      cy.get(wishlistCounter, { timeout: waitStandard }).then(countTwo => {
+      cy.get(wishlistCounter, { timeout: waitStandard }).then((countTwo) => {
         const changedCount = countTwo[0].innerText;
         expect(changedCount).to.not.eq(originalCount);
       });
@@ -264,17 +214,17 @@ describe("Tests for take item functionalities", () => {
         cy.request({
           method: "POST",
           url: "http://localhost:4000/graphql",
-          body: addToWishlistReq(1118)
+          body: addToWishlistReq(1118),
         }).then(() => {
           cy.request({
             method: "POST",
             url: "http://localhost:4000/graphql",
-            body: addToWishlistReq(1115)
+            body: addToWishlistReq(1115),
           }).then(() => {
             cy.request({
               method: "POST",
               url: "http://localhost:4000/graphql",
-              body: addToWishlistReq(1112)
+              body: addToWishlistReq(1112),
             }).then(() => {
               cy.get(navGive, { timeout: waitStandard }).should("be.visible");
               cy.visit("/");

@@ -18,8 +18,8 @@ export const errorMissingUsername =
 export const errorNonexistUser =
   "User with email: nonexists@email.com does not exist!";
 export const errorNonmatchPassword = "Passwords have to match!";
-export const errorUserExists = username => `User ${username} already exists!`;
-export const errorEmailExists = email =>
+export const errorUserExists = (username) => `User ${username} already exists!`;
+export const errorEmailExists = (email) =>
   `User with email ${email} already exists!`;
 export const errorWrongPass = "Password for user normal_user is incorrect!";
 export const signinResetBttn = 'button[data-test="signinResetButton"]';
@@ -33,5 +33,5 @@ export const successResetP = 'p[data-test="successReset"]';
 export const signoutReq = {
   operationName: "SIGN_OUT",
   variables: {},
-  query: "mutation SIGN_OUT {\n  signout\n}\n"
+  query: "mutation SIGN_OUT {\n  signout\n}\n",
 };

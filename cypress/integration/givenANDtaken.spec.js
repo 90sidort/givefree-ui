@@ -1,13 +1,10 @@
 import {
-  searchItemsInput,
   waitStandard,
-  dropdownItem,
-  searchItemImage,
   navGive,
   navGiven,
   sectionTaken,
   prevPageButton,
-  nextPageButton
+  nextPageButton,
 } from "../support/variables/general";
 
 import {
@@ -17,7 +14,7 @@ import {
   deleteItemButton,
   itemLink,
   givenToPar,
-  addToWishlistBttn
+  addToWishlistBttn,
 } from "../support/variables/item";
 
 import { validUsername, validPassword } from "../support/variables/sign";
@@ -34,14 +31,10 @@ describe("Tests for given & taken views", () => {
     cy.get(navGiven, { timeout: waitStandard }).click();
     cy.url().should("include", "/given");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/given/2");
     cy.checkPageBttn("false", "true");
-    cy.get(prevPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(prevPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/given/1");
     cy.checkPageBttn("true", "false");
   });
@@ -51,14 +44,10 @@ describe("Tests for given & taken views", () => {
     cy.get(sectionTaken, { timeout: waitStandard }).click();
     cy.url().should("include", "/taken");
     cy.checkPageBttn("true", "false");
-    cy.get(nextPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(nextPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/taken/2");
     cy.checkPageBttn("false", "true");
-    cy.get(prevPageButton, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(prevPageButton, { timeout: waitStandard }).eq(0).click();
     cy.url().should("include", "/taken/1");
     cy.checkPageBttn("true", "false");
   });
@@ -85,9 +74,7 @@ describe("Tests for given & taken views", () => {
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.get(navGiven, { timeout: waitStandard }).click();
     cy.url().should("include", "/given");
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(0).click();
     cy.get(itemDetailsName, { timeout: waitStandard }).should("be.visible");
     cy.get(givenToPar, { timeout: waitStandard }).should("be.visible");
     cy.get(addToWishlistBttn, { timeout: waitStandard }).should("not.exist");
@@ -97,9 +84,7 @@ describe("Tests for given & taken views", () => {
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.get(navGiven, { timeout: waitStandard }).click();
     cy.url().should("include", "/given");
-    cy.get(itemLink, { timeout: waitStandard })
-      .eq(0)
-      .click();
+    cy.get(itemLink, { timeout: waitStandard }).eq(0).click();
     cy.get(itemDetailsName, { timeout: waitStandard }).should("be.visible");
     cy.get(givenToPar, { timeout: waitStandard }).should("be.visible");
     cy.get(addToWishlistBttn, { timeout: waitStandard }).should("not.exist");
