@@ -12,6 +12,10 @@ import {
   signButton,
   signinButton,
   usernameInput,
+  nameInput,
+  surnameInput,
+  emailInput,
+  retypeInput,
 } from "../variables/sign";
 
 import {
@@ -89,5 +93,17 @@ Cypress.Commands.add(
     cy.get(aboutPar, { timeout: waitStandard })
       .invoke("text")
       .should("include", about);
+  }
+);
+
+Cypress.Commands.add(
+  "createUser",
+  (username, name, surname, email, pass, retype) => {
+    cy.get(usernameInput, { timeout: waitStandard }).type(username);
+    cy.get(nameInput, { timeout: waitStandard }).type(name);
+    cy.get(surnameInput, { timeout: waitStandard }).type(surname);
+    cy.get(emailInput, { timeout: waitStandard }).type(email);
+    cy.get(passwordInput, { timeout: waitStandard }).type(pass);
+    cy.get(retypeInput, { timeout: waitStandard }).type(retype);
   }
 );

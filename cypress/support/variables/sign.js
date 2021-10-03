@@ -17,6 +17,10 @@ export const buttonSignup = 'button[data-type="signupButton"]';
 export const resetPassBttn = 'button[data-test="resetPassBttn"]';
 export const successResetP = 'p[data-test="successReset"]';
 // Texts
+export const newUsername = "brand_new_user";
+export const newName = "brand";
+export const newSurname = "new_user";
+export const newEmail = "brandnew@test.com";
 export const validUsername = "normal_user";
 export const itemOwner = "nduffieldl";
 export const validPassword = "testtest2";

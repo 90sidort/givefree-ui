@@ -31,6 +31,10 @@ import {
   usernameInput,
   validPassword,
   validUsername,
+  newUsername,
+  newName,
+  newSurname,
+  newEmail,
 } from "../support/variables/sign";
 
 describe("Test for signin/ signup functionalities", () => {
@@ -91,12 +95,14 @@ describe("Test for signin/ signup functionalities", () => {
     cy.get(signButton, { timeout: waitStandard }).click();
     cy.url().should("include", "/signin");
     cy.get(signupRedirect, { timeout: waitStandard }).click();
-    cy.get(usernameInput, { timeout: waitStandard }).type("brand_new_user");
-    cy.get(nameInput, { timeout: waitStandard }).type("brand");
-    cy.get(surnameInput, { timeout: waitStandard }).type("new_user");
-    cy.get(emailInput, { timeout: waitStandard }).type("brandnew@test.com");
-    cy.get(passwordInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(retypeInput, { timeout: waitStandard }).type(validPassword);
+    cy.createUser(
+      newUsername,
+      newName,
+      newSurname,
+      newEmail,
+      validPassword,
+      validPassword
+    );
     cy.get(buttonSignup, { timeout: waitStandard }).click();
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/give");
@@ -107,12 +113,14 @@ describe("Test for signin/ signup functionalities", () => {
     cy.get(signButton, { timeout: waitStandard }).click();
     cy.url().should("include", "/signin");
     cy.get(signupRedirect, { timeout: waitStandard }).click();
-    cy.get(usernameInput, { timeout: waitStandard }).type("brand_new_user");
-    cy.get(nameInput, { timeout: waitStandard }).type("brand");
-    cy.get(surnameInput, { timeout: waitStandard }).type("new_user");
-    cy.get(emailInput, { timeout: waitStandard }).type("brandnew@test.com");
-    cy.get(passwordInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(retypeInput, { timeout: waitStandard }).type(invalidCredential);
+    cy.createUser(
+      newUsername,
+      newName,
+      newSurname,
+      newEmail,
+      validPassword,
+      invalidCredential
+    );
     cy.get(buttonSignup, { timeout: waitStandard }).click();
     cy.get(errorDisplay, { timeout: waitStandard })
       .invoke("text")
@@ -123,12 +131,14 @@ describe("Test for signin/ signup functionalities", () => {
     cy.get(signButton, { timeout: waitStandard }).click();
     cy.url().should("include", "/signin");
     cy.get(signupRedirect, { timeout: waitStandard }).click();
-    cy.get(usernameInput, { timeout: waitStandard }).type(validUsername);
-    cy.get(nameInput, { timeout: waitStandard }).type("brand");
-    cy.get(surnameInput, { timeout: waitStandard }).type("new_user");
-    cy.get(emailInput, { timeout: waitStandard }).type("brandnew@test.com");
-    cy.get(passwordInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(retypeInput, { timeout: waitStandard }).type(validPassword);
+    cy.createUser(
+      validUsername,
+      newName,
+      newSurname,
+      newEmail,
+      validPassword,
+      validPassword
+    );
     cy.get(buttonSignup, { timeout: waitStandard }).click();
     cy.get(errorDisplay, { timeout: waitStandard })
       .invoke("text")
@@ -139,12 +149,14 @@ describe("Test for signin/ signup functionalities", () => {
     cy.get(signButton, { timeout: waitStandard }).click();
     cy.url().should("include", "/signin");
     cy.get(signupRedirect, { timeout: waitStandard }).click();
-    cy.get(usernameInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(nameInput, { timeout: waitStandard }).type("brand");
-    cy.get(surnameInput, { timeout: waitStandard }).type("new_user");
-    cy.get(emailInput, { timeout: waitStandard }).type(normalEmail);
-    cy.get(passwordInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(retypeInput, { timeout: waitStandard }).type(validPassword);
+    cy.createUser(
+      validPassword,
+      newName,
+      newSurname,
+      normalEmail,
+      validPassword,
+      validPassword
+    );
     cy.get(buttonSignup, { timeout: waitStandard }).click();
     cy.get(errorDisplay, { timeout: waitStandard })
       .invoke("text")
@@ -155,12 +167,14 @@ describe("Test for signin/ signup functionalities", () => {
     cy.get(signButton, { timeout: waitStandard }).click();
     cy.url().should("include", "/signin");
     cy.get(signupRedirect, { timeout: waitStandard }).click();
-    cy.get(usernameInput, { timeout: waitStandard }).type("a");
-    cy.get(nameInput, { timeout: waitStandard }).type("brand");
-    cy.get(surnameInput, { timeout: waitStandard }).type("new_user");
-    cy.get(emailInput, { timeout: waitStandard }).type(normalEmail);
-    cy.get(passwordInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(retypeInput, { timeout: waitStandard }).type(validPassword);
+    cy.createUser(
+      "a",
+      newName,
+      newSurname,
+      normalEmail,
+      validPassword,
+      validPassword
+    );
     cy.get(buttonSignup, { timeout: waitStandard }).click();
     cy.get(errorDisplay, { timeout: waitStandard })
       .invoke("text")
@@ -171,12 +185,14 @@ describe("Test for signin/ signup functionalities", () => {
     cy.get(signButton, { timeout: waitStandard }).click();
     cy.url().should("include", "/signin");
     cy.get(signupRedirect, { timeout: waitStandard }).click();
-    cy.get(usernameInput, { timeout: waitStandard }).type("a");
-    cy.get(nameInput, { timeout: waitStandard }).type("brand");
-    cy.get(surnameInput, { timeout: waitStandard }).type("new_user");
-    cy.get(emailInput, { timeout: waitStandard }).type(normalEmail);
-    cy.get(passwordInput, { timeout: waitStandard }).type(validPassword);
-    cy.get(retypeInput, { timeout: waitStandard }).type(validPassword);
+    cy.createUser(
+      "a",
+      newName,
+      newSurname,
+      normalEmail,
+      validPassword,
+      validPassword
+    );
     cy.get(signinResetBttn, { timeout: waitStandard }).click();
     cy.get(usernameInput, { timeout: waitStandard }).should("have.value", "");
     cy.get(nameInput, { timeout: waitStandard }).should("have.value", "");
