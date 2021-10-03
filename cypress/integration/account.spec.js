@@ -1,9 +1,4 @@
 import {
-  usernamPar,
-  emailPar,
-  firstNamePar,
-  lastNamePar,
-  aboutPar,
   accountEditBttn,
   changeName,
   changeSurname,
@@ -11,6 +6,11 @@ import {
   changeAbout,
   updateUserBttn,
   accountCancelBttn,
+  aboutNormal,
+  nameNormal,
+  surnameNormal,
+  changeNormal,
+  emailChange,
 } from "../support/variables/account";
 
 import {
@@ -35,51 +35,31 @@ describe("Tests for give account view", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navAccount, { timeout: waitStandard }).click();
     cy.url().should("include", "account");
-    cy.get(usernamPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", validUsername);
-    cy.get(emailPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", normalEmail);
-    cy.get(firstNamePar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "Normal");
-    cy.get(lastNamePar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "User");
-    cy.get(aboutPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", " I am a regular user,");
+    cy.checkAccount(
+      validUsername,
+      normalEmail,
+      nameNormal,
+      surnameNormal,
+      aboutNormal
+    );
   });
   it("Should be able to cancel account data changes", () => {
     cy.loginNoUI(validUsername, validPassword);
     cy.get(navAccount, { timeout: waitStandard }).click();
     cy.url().should("include", "account");
     cy.get(accountEditBttn, { timeout: waitStandard }).click();
-    cy.get(changeName, { timeout: waitStandard }).clear();
-    cy.get(changeName, { timeout: waitStandard }).type("Changed");
-    cy.get(changeSurname, { timeout: waitStandard }).clear();
-    cy.get(changeSurname, { timeout: waitStandard }).type("Changed");
-    cy.get(changeEmail, { timeout: waitStandard }).clear();
-    cy.get(changeEmail, { timeout: waitStandard }).type("changed@test.com");
-    cy.get(changeAbout, { timeout: waitStandard }).clear();
-    cy.get(changeAbout, { timeout: waitStandard }).type("Changed description");
+    cy.rewriteField(changeName, changeNormal);
+    cy.rewriteField(changeSurname, changeNormal);
+    cy.rewriteField(changeEmail, emailChange);
+    cy.rewriteField(changeAbout, changeNormal);
     cy.get(accountCancelBttn, { timeout: waitStandard }).click();
-    cy.get(usernamPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", validUsername);
-    cy.get(emailPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", normalEmail);
-    cy.get(firstNamePar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "Normal");
-    cy.get(lastNamePar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "User");
-    cy.get(aboutPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", " I am a regular user,");
+    cy.checkAccount(
+      validUsername,
+      normalEmail,
+      nameNormal,
+      surnameNormal,
+      aboutNormal
+    );
   });
   it("Should not be able to change account data to invalid", () => {
     cy.loginNoUI(validUsername, validPassword);
@@ -98,26 +78,17 @@ describe("Tests for give account view", () => {
     cy.get(navAccount, { timeout: waitStandard }).click();
     cy.url().should("include", "account");
     cy.get(accountEditBttn, { timeout: waitStandard }).click();
-    cy.get(changeName, { timeout: waitStandard }).clear();
-    cy.get(changeName, { timeout: waitStandard }).type("Changed");
-    cy.get(changeSurname, { timeout: waitStandard }).clear();
-    cy.get(changeSurname, { timeout: waitStandard }).type("Changed");
-    cy.get(changeEmail, { timeout: waitStandard }).clear();
-    cy.get(changeEmail, { timeout: waitStandard }).type("changed@test.com");
-    cy.get(changeAbout, { timeout: waitStandard }).clear();
-    cy.get(changeAbout, { timeout: waitStandard }).type("Changed description");
+    cy.rewriteField(changeName, changeNormal);
+    cy.rewriteField(changeSurname, changeNormal);
+    cy.rewriteField(changeEmail, emailChange);
+    cy.rewriteField(changeAbout, changeNormal);
     cy.get(updateUserBttn, { timeout: waitStandard }).click();
-    cy.get(emailPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "changed@test.com");
-    cy.get(firstNamePar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "Changed");
-    cy.get(lastNamePar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "Changed");
-    cy.get(aboutPar, { timeout: waitStandard })
-      .invoke("text")
-      .should("include", "Changed description");
+    cy.checkAccount(
+      validUsername,
+      emailChange,
+      changeNormal,
+      changeNormal,
+      changeNormal
+    );
   });
 });

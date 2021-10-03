@@ -1,3 +1,4 @@
+// Elements
 export const itemDetailsName = 'h2[data-test="itemDetailsName"]';
 export const itemCard = 'div[data-test="itemCard"]';
 export const itemLink = 'a[data-test="itemLink"]';
@@ -23,10 +24,6 @@ export const itemDescriptionTextarea =
 export const resetItemBttn = 'button[data-test="resetItemBttn"]';
 export const addItemBttn = 'button[data-test="addItemBttn"]';
 export const imagePlaceholder = 'img[data-test="imagePlaceholder"]';
-export const pngExample = "png_example.png";
-export const errorUnauthorized = "Unauthorized! You need to log in!";
-export const errorName = "is not between 4 and 400 characters long!";
-export const errorDesc = "Description has to be between 5 and 2000 characters!";
 export const itemDetailsImage = 'img[data-test="itemDetailsImage"]';
 export const updateItemBttn = 'button[data-test="updateItemButton"]';
 export const confirmBttn = 'a[data-test="confirmBttn"]';
@@ -34,37 +31,8 @@ export const possibleTakersH3 = 'h3[data-test="possibleTakersH3"]';
 export const noTakerPar = 'p[data-test="noTakers"]';
 export const acceptUserOffer = 'button[data-test="acceptUserOffer"]';
 export const givenToPar = 'p[data-test="givenToPar"]';
-
-export const addToWishlistReq = (idItem) => ({
-  operationName: "ADD_ITEM_TO_WISHLIST",
-  variables: {
-    itemId: idItem,
-  },
-  query:
-    "mutation ADD_ITEM_TO_WISHLIST($itemId: Int!) {\n  addToWishlist(itemId: $itemId)\n}\n",
-});
-export const addItemReq = {
-  operationName: "ADD_ITEM",
-  variables: {
-    item: {
-      name: "newTestItem",
-      state: "GOOD",
-      category: "OTHER",
-      status: "ONGOING",
-      giverId: 11123,
-      description: "",
-    },
-    file: "",
-  },
-  query:
-    "mutation ADD_ITEM($item: ItemInput!, $file: FileUpload) {\n  addItem(item: $item, file: $file) {\n    name\n    id\n    description\n    category\n    images {\n      url\n      alt\n      __typename\n    }\n    __typename\n  }\n}\n",
-};
-export const giveItemReq = {
-  operationName: "GIVE_ITEM",
-  variables: {
-    userId: 11123,
-    itemId: 11195,
-  },
-  query:
-    "mutation GIVE_ITEM($userId: Int!, $itemId: Int!) {\n  giveItem(userId: $userId, itemId: $itemId) {\n    id\n    __typename\n  }\n}\n",
-};
+// Texts
+export const pngExample = "png_example.png";
+export const errorUnauthorized = "Unauthorized! You need to log in!";
+export const errorName = "is not between 4 and 400 characters long!";
+export const errorDesc = "Description has to be between 5 and 2000 characters!";

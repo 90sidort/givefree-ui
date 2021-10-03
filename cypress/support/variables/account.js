@@ -11,3 +11,9 @@ export const changeSurname = 'input[data-test="changeSurname"]';
 export const changeEmail = 'input[data-test="changeEmail"]';
 export const changeAbout = 'textarea[data-test="changeAbout"]';
 export const updateUserBttn = 'button[data-test="updateUserBttn"]';
+// Texts
+export const aboutNormal = " I am a regular user,";
+export const nameNormal = "Normal";
+export const surnameNormal = "User";
+export const changeNormal = "Changed";
+export const emailChange = "changed@test.com";

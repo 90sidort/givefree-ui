@@ -1,16 +1,26 @@
 import "cypress-file-upload";
+
 import {
   graphqlLink,
   waitStandard,
   prevPageButton,
   nextPageButton,
 } from "../variables/general";
+
 import {
   passwordInput,
   signButton,
   signinButton,
   usernameInput,
 } from "../variables/sign";
+
+import {
+  usernamPar,
+  emailPar,
+  firstNamePar,
+  lastNamePar,
+  aboutPar,
+} from "../variables/account";
 
 Cypress.Commands.add("loginUI", (username, password) => {
   cy.visit("/");
@@ -28,9 +38,14 @@ Cypress.Commands.add("loginNoUI", (username, password) => {
     variables: { username, password },
     query:
       "mutation SIGN_IN($username: String!, $password: String!) {\n  signinUser(password: $password, username: $username)\n}\n",
-  }).then((res) => {
+  }).then(() => {
     cy.visit("/give");
   });
+});
+
+Cypress.Commands.add("rewriteField", (element, text) => {
+  cy.get(element, { timeout: waitStandard }).clear();
+  cy.get(element, { timeout: waitStandard }).type(text);
 });
 
 Cypress.Commands.add("mockDB", () => {
@@ -55,3 +70,24 @@ Cypress.Commands.add("checkPageBttn", (prevDisable, nextDisable) => {
     nextDisable
   );
 });
+
+Cypress.Commands.add(
+  "checkAccount",
+  (username, email, name, surname, about) => {
+    cy.get(usernamPar, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", username);
+    cy.get(emailPar, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", email);
+    cy.get(firstNamePar, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", name);
+    cy.get(lastNamePar, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", surname);
+    cy.get(aboutPar, { timeout: waitStandard })
+      .invoke("text")
+      .should("include", about);
+  }
+);

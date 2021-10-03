@@ -25,8 +25,9 @@ import {
   removeFormWishlist,
   closeWishBttn,
   emailParagraph,
-  addToWishlistReq,
 } from "../support/variables/item";
+
+import { addToWishlistReq } from "../support/variables/queries";
 
 import { validUsername, validPassword } from "../support/variables/sign";
 

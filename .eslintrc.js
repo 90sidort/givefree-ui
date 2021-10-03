@@ -2,6 +2,12 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    "jest/globals": true,
+  },
+  globals: {
+    cy: true,
+    before: true,
+    Cypress: true,
   },
   extends: [
     "plugin:react/recommended",
@@ -15,7 +21,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "prettier"],
+  plugins: ["react", "prettier", "jest"],
   rules: {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/prop-types": 0,
@@ -26,5 +32,9 @@ module.exports = {
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      { devDependencies: ["**/*.test.js", "**/*.spec.js", "**/commands.js"] },
+    ],
   },
 };

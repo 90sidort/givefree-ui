@@ -15,7 +15,6 @@ import {
   itemNameInput,
   itemDetailsName,
   itemLink,
-  giveItemReq,
   editItemButton,
   updateItemBttn,
   deleteItemButton,
@@ -25,7 +24,6 @@ import {
   acceptUserOffer,
   givenToPar,
   wishlistItemTitle,
-  addItemReq,
   addToWishlistBttn,
   giveItemButton,
 } from "../support/variables/item";
@@ -33,9 +31,14 @@ import {
 import {
   validUsername,
   validPassword,
-  signoutReq,
   itemOwner,
 } from "../support/variables/sign";
+
+import {
+  addItemReq,
+  giveItemReq,
+  signoutReq,
+} from "../support/variables/queries";
 
 describe("Tests for search the rest of item functionalities", () => {
   before(() => {

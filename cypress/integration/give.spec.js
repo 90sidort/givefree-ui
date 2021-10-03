@@ -25,7 +25,6 @@ import {
   errorDesc,
   imagePlaceholder,
   itemCard,
-  addItemReq,
   editItemButton,
   updateItemBttn,
   deleteItemButton,
@@ -36,6 +35,8 @@ import {
   acceptUserOffer,
   givenToPar,
 } from "../support/variables/item";
+
+import { addItemReq } from "../support/variables/queries";
 
 import { validUsername, validPassword } from "../support/variables/sign";
 
