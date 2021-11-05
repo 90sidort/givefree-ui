@@ -1,0 +1,5 @@
+node_modules
+.prettier
+.eslintrc.js
+.eslintignore
+.eslintcache

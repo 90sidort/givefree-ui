@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  ui:
+    container_name: bookshare_ui
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 7777:7777
+    volumes:
+      - .:/ui
+      - /ui/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
