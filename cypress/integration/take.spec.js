@@ -166,14 +166,16 @@ describe("Tests for take item functionalities", () => {
     cy.get(navGive, { timeout: waitStandard }).should("be.visible");
     cy.visit("/");
     cy.get(addToWishlistBttn, { timeout: waitStandard }).eq(0).click();
-    cy.wait("@request").then((interception) => {
-      expect(interception.response.body.data.addToWishlist).to.eq(true);
+    cy.wait("@request").then(() => {
+      cy.get(wishlistCounter, { timeout: waitStandard }).should(
+        "have.text",
+        "9"
+      );
+      cy.get(sectionWishlist, { timeout: waitStandard }).click();
+      cy.get(wishlistItemTitle("customer loyalty"), {
+        timeout: waitStandard,
+      }).should("exist");
     });
-    cy.get(wishlistCounter, { timeout: waitStandard }).should("have.text", "9");
-    cy.get(sectionWishlist, { timeout: waitStandard }).click();
-    cy.get(wishlistItemTitle("customer loyalty"), {
-      timeout: waitStandard,
-    }).should("exist");
   });
   it("Should not be able to add the same item again to wishlist", () => {
     cy.intercept("POST", "**/graphql").as("request");

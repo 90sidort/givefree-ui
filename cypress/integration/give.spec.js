@@ -48,6 +48,7 @@ describe("Tests for give item functionalities", () => {
   });
   it("Should not be able to give items without login in", () => {
     cy.visit("/give");
+    cy.url().should("include", "/give");
     cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
     cy.get(itemFileInput, { timeout: waitStandard }).attachFile(pngExample);
     cy.get(addItemBttn, { timeout: waitStandard }).click();
@@ -80,17 +81,12 @@ describe("Tests for give item functionalities", () => {
     cy.get(itemNameInput, { timeout: waitStandard }).type("new shoes");
     cy.get(itemFileInput, { timeout: waitStandard }).attachFile(pngExample);
     cy.get(addItemBttn, { timeout: waitStandard }).click();
-    cy.wait("@request").then((interception) => {
-      expect(interception.response.body.data.addItem.name).to.eq("new shoes");
+    cy.wait("@request").then(() => {
       cy.get(itemDetailsName, { timeout: waitStandard })
         .should("be.visible")
         .invoke("text")
         .should("include", "new shoes");
       cy.get(itemDetailsImage, { timeout: waitStandard }).should("be.visible");
-      cy.url().should(
-        "include",
-        `/item/${interception.response.body.data.addItem.id}`
-      );
       cy.get(navTake, { timeout: waitStandard }).click();
       cy.get(itemLink, { timeout: waitStandard })
         .eq(0)
@@ -116,17 +112,12 @@ describe("Tests for give item functionalities", () => {
       "Super description"
     );
     cy.get(addItemBttn, { timeout: waitStandard }).click();
-    cy.wait("@request").then((interception) => {
-      expect(interception.response.body.data.addItem.name).to.eq("new socks");
+    cy.wait("@request").then(() => {
       cy.get(itemDetailsName, { timeout: waitStandard })
         .should("be.visible")
         .invoke("text")
         .should("include", "new socks");
       cy.get(itemDetailsImage, { timeout: waitStandard }).should("be.visible");
-      cy.url().should(
-        "include",
-        `/item/${interception.response.body.data.addItem.id}`
-      );
       cy.get(navTake, { timeout: waitStandard }).click();
       cy.get(itemLink, { timeout: waitStandard })
         .eq(0)
