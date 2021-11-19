@@ -33,6 +33,6 @@ export const acceptUserOffer = 'button[data-test="acceptUserOffer"]';
 export const givenToPar = 'p[data-test="givenToPar"]';
 // Texts
 export const pngExample = "png_example.png";
-export const errorUnauthorized = "Unauthorized! You need to log in!";
+export const errorUnauthorized = "Unauthorized!";
 export const errorName = "is not between 4 and 400 characters long!";
 export const errorDesc = "Description has to be between 5 and 2000 characters!";
